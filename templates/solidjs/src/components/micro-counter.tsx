@@ -1,4 +1,4 @@
-import { useReactive } from '@micro-cube/reactive'
+import { useReactive } from 'micro-reactive'
 
 export default function Counter() {
   const count = useReactive(0)

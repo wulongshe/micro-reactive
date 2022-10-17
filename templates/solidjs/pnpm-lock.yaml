@@ -1,15 +1,15 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@micro-cube/reactive': 1.1.6
   '@types/react': ^18.0.21
+  micro-reactive: 1.0.0
   solid-js: ^1.5.7
   typescript: ^4.6.4
   vite: ^3.1.0
   vite-plugin-solid: ^2.3.9
 
 dependencies:
-  '@micro-cube/reactive': 1.1.6
+  micro-reactive: 1.0.0
   solid-js: 1.5.7
 
 devDependencies:
@@ -37,11 +37,6 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
-
-  /@micro-cube/reactive/1.1.6:
-    resolution: {integrity: sha512-PFWsgdRZqx8/qQusWENL30DXSMyvJNHDK+xjtFwa7xDA3g6qd1kFoEHWf18DFtI0SYeGqQU4OkIjvFX+1ERxNg==}
-    engines: {node: '>=14.20.0'}
-    dev: false
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
@@ -233,6 +228,11 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /micro-reactive/1.0.0:
+    resolution: {integrity: sha512-cTYAHkZU8kksRNZrKqBgBdWsPokRzcRlz1CmooGJuuIh0XvvQ5+RkSnkvKfPec2zPUrJ5AY55RNIgP47k3NGlQ==}
+    engines: {node: '>=14.20.0'}
+    dev: false
 
   /solid-js/1.5.7:
     resolution: {integrity: sha512-L1UuyMuZZARAwzXo5NZDhE6yxc14aqNbVOUoGzvlcxRZo1Cm4ExhPV0diEfwDyiKG/igqNNLkNurHkXiI5sVEg==}

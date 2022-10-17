@@ -3,7 +3,7 @@ const fileRegex = /\.(cjs|js|ts)/
 const funcRegex = /function updateComputation/
 // 导入
 const importUseEffect = `
-import { useEffect } from "@micro-cube/reactive";
+import { useEffect } from "micro-reactive";
 `
 // 替换
 const hackUpdateComputation = `
