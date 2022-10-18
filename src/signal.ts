@@ -5,15 +5,19 @@ const NULL = Symbol('NULL')
 
 export function read<T>({ effects, reactiveMap, value }: Option<T>): T {
   track(effects)
-  for (const key in reactiveMap) {
-    value[key] = reactiveMap[key]() as T[typeof key]
+  if (reactiveMap instanceof Map) {
+    for (const [key, reactive] of reactiveMap) {
+      value[key] = reactive() as T[typeof key]
+    }
   }
   return value
 }
 
 export function write<T>({ effects, reactiveMap, value }: Option<T>) {
-  for (const key in reactiveMap) {
-    reactiveMap[key](value[key])
+  if (reactiveMap instanceof Map) {
+    for (const [key, reactive] of reactiveMap) {
+      reactive(value[key])
+    }
   }
   trigger(effects)
 }

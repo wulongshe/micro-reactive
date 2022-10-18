@@ -25,9 +25,7 @@ export type ReadonlyReactive<T> = ReadonlySignal<T> &
     ? { readonly [key in keyof T]: Reactive<T[key]> }
     : {})
 
-export type ReactiveMap<T> = {
-  [key in keyof T]: Reactive<T[key]>
-}
+export type ReactiveMap<T> = Map<keyof T, Reactive<T[keyof T]>>
 
 export type EffectFunction = (...args: any[]) => any
 
