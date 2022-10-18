@@ -4,6 +4,54 @@
 
 > Reactive core based on `Function` and `Proxy`
 
+## 优势
+
+- 基于 `Function` 和 `Proxy` 实现的响应式。
+- 有着与 `solid` 相似的语法风格，不需要考虑变量是基础类型还是对象类型，没有 `vue3` 中诸如 `ref.value` 的问题。
+- 对比 `vue3`，该库所实现的响应式对象可任意解构而不会失去响应式，且可对根对象进行修改的同时不丢失响应。
+- 对比 `solid`，读写操作更为统一，且和 `vue3` 一样支持链式调用。
+
+```ts
+/* micro-reactive */
+const data = useReactive({ id: 1, value: 0 });
+// 直接修改根对象，不会丢失响应
+data({ id: 2, value: 1 });
+// 链式调用
+data.id(3);
+console.log(data()); // { id: 3, value: -1 }
+// 直接解构，不需要 toRefs() 操作
+const { value } = data;
+value(-1);
+console.log(data()); // { id: 3, value: -1 }
+```
+
+```ts
+/* vue3 */
+let data = reactive({ id: 1, value: 0 });
+// 以下修改操作会导致丢失响应式
+data = reactive({ id: 2, value: 1 });
+// 链式调用
+data.id = 3;
+console.log(data); // { id: 3, value -1 }
+// 解构
+const { value } = toRefs(data);
+value.value = -1;
+console.log(data); // { id: 2, value -1 }
+```
+
+```ts
+/* solid */
+const [data, setData] = createSignal({ id: 1, value: 0 }, { equals: false });
+setData({ id: 2, value: 1 });
+// 链式调用修改
+setData((data) => {
+  data.id = 3;
+  return data;
+});
+console.log(data()); // { id: 3, value -1 }
+// solid 原生不支持解构
+```
+
 ## 安装
 
 ```bash
