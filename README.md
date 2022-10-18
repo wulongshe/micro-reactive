@@ -66,9 +66,14 @@ pnpm i micro-reactive
 ## 尝试
 
 - [RunKit 在线运行](https://npm.runkit.com/micro-reactive)
-- 嵌入 solid 项目中运行
+- 替换嵌入到 solid 项目中运行
   - 下载仓库到本地 [download link](https://github.com/Yuki-0505/micro-reactive.git)
   - 在终端中进入 `micro-reactive/templates/solidjs` 目录
+  - 使用 `pnpm i` 安装依赖
+  - `pnpm dev` 启动项目
+- 替换嵌入到 vue3 项目中允许
+  - 下载仓库到本地 [download link](https://github.com/Yuki-0505/micro-reactive.git)
+  - 在终端中进入 `micro-reactive/templates/vue3` 目录
   - 使用 `pnpm i` 安装依赖
   - `pnpm dev` 启动项目
 
@@ -95,7 +100,7 @@ console.log(double); // 6
 
 ## 模板
 
-> 嵌入到 `solid js` 中 [(with solid js)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/solidjs)
+### 替换嵌入到 `solid js` 中 [(with solid js)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/solidjs)
 
 ```ts
 /* micro-counter.tsx */
@@ -123,6 +128,37 @@ import TrackEffect from "./plugins/vite-plugin-track-effect";
 export default defineConfig({
   plugins: [solidPlugin(), TrackEffect()],
 });
+```
+
+### 替换嵌入到 `vue3` 中 [(with vue3)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/vue3)
+
+```vue
+/* MicroCounter.vue */
+<script setup lang="ts">
+import { useReactive } from "micro-reactive";
+
+const count = useReactive(0);
+</script>
+
+<template>
+  <button type="button" @click="count(count() + 1)">
+    count is {{ count() }}
+  </button>
+</template>
+```
+
+```ts
+/* main.ts 中添加以下代码 */
+import { createApp, ReactiveEffect } from "vue";
+import { useEffect } from "micro-reactive";
+
+// hack ReactiveEffect
+const hackRun = ReactiveEffect.prototype.run;
+ReactiveEffect.prototype.run = function () {
+  useEffect(() => {
+    hackRun.call(this);
+  });
+};
 ```
 
 ## 测试
