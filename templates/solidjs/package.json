@@ -15,7 +15,7 @@
     "vite-plugin-solid": "^2.3.9"
   },
   "dependencies": {
-    "micro-reactive": "^1.4.0",
+    "micro-reactive": "^1.5.0",
     "solid-js": "^1.5.7"
   }
 }

@@ -26,9 +26,9 @@ export function trigger(effects: Set<EffectFunction>) {
   clear()
 }
 
-export function useEffect(effect: EffectFunction) {
+export function useEffect<T extends [], R>(effect: EffectFunction<T, R>, ...args: T): R {
   currentEffect = effect
-  const value = effect()
+  const value = effect(...args)
   currentEffect = null
   return value
 }
