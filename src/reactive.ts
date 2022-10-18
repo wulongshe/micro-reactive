@@ -1,5 +1,5 @@
 import { createSignal } from './signal'
-import type { Reactive, ReactiveMap, Signal, Option } from './type'
+import type { Reactive, Signal, Option } from './type'
 
 export function createProxy<T>(signal: Signal<T>, option: Option<T>) {
   return new Proxy(signal, {
@@ -7,7 +7,7 @@ export function createProxy<T>(signal: Signal<T>, option: Option<T>) {
       const { reactiveMap, value } = option
 
       // 若属性的响应式对象已存在，直接返回
-      const reactive = reactiveMap[key as keyof T]
+      const reactive = reactiveMap.get(key as keyof T)
       if (reactive) return reactive
 
       // signal 函数上的属性
@@ -18,14 +18,16 @@ export function createProxy<T>(signal: Signal<T>, option: Option<T>) {
       if (typeof value !== 'object' || value === null) return void 0
 
       // 生成属性的响应式对象，缓存并返回
-      return reactiveMap[key as keyof T] = useReactive(value[key as keyof T]) as any
+      const react = useReactive(value[key as keyof T])
+      reactiveMap.set(key as keyof T, react as any)
+      return react
     }
   }) as Reactive<T>
 }
 
 export function useReactive<T>(value: T): Reactive<T> {
   const option: Option<T> = {
-    reactiveMap: {} as ReactiveMap<T>,
+    reactiveMap: new Map(),
     effects: new Set(),
     value
   }
