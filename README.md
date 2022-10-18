@@ -141,10 +141,8 @@ const importUseEffect = `import { useEffect } from "micro-reactive";`;
 const hackUpdateComputation = `
 const update = updateComputation
 updateComputation = function (node) {
-  const self = this
-  useEffect(() => update.call(self, node))
-}
-`;
+  useEffect(() => update.call(this, node));
+}`;
 export default function TrackEffect() {
   return {
     name: "track-effect",
@@ -182,10 +180,10 @@ import { useEffect } from "micro-reactive";
 // hack ReactiveEffect
 const hackRun = ReactiveEffect.prototype.run;
 ReactiveEffect.prototype.run = function () {
-  useEffect(() => {
-    hackRun.call(this);
-  });
-};
+  let value: any;
+  useEffect(() => value = hackRun.call(this));
+  return value;
+}
 ```
 
 ## 测试

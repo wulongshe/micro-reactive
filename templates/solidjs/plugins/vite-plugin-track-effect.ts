@@ -2,17 +2,13 @@
 const fileRegex = /\.(cjs|mjs|js|ts)/
 const funcRegex = /function updateComputation/
 // 导入
-const importUseEffect = `
-import { useEffect } from "micro-reactive";
-`
+const importUseEffect = `import { useEffect } from "micro-reactive";`
 // 替换
 const hackUpdateComputation = `
-const update = updateComputation
+const update = updateComputation;
 updateComputation = function (node) {
-  const self = this
-  useEffect(() => update.call(self, node))
-}
-`
+  useEffect(() => update.call(this, node));
+}`
 
 export default function TrackEffect() {
   return {
