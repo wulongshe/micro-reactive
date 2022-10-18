@@ -71,7 +71,7 @@ pnpm i micro-reactive
   - 在终端中进入 `micro-reactive/templates/solidjs` 目录
   - 使用 `pnpm i` 安装依赖
   - `pnpm dev` 启动项目
-- 替换嵌入到 vue3 项目中允许
+- 替换嵌入到 vue3 项目中运行
   - 下载仓库到本地 [download link](https://github.com/Yuki-0505/micro-reactive.git)
   - 在终端中进入 `micro-reactive/templates/vue3` 目录
   - 使用 `pnpm i` 安装依赖
@@ -128,6 +128,33 @@ import TrackEffect from "./plugins/vite-plugin-track-effect";
 export default defineConfig({
   plugins: [solidPlugin(), TrackEffect()],
 });
+```
+
+```ts
+/* vite-plugin-track-effect */
+// 使用 useEffect 收集组件更新方法
+const fileRegex = /\.(cjs|mjs|js|ts)/;
+const funcRegex = /function updateComputation/;
+// 导入
+const importUseEffect = `import { useEffect } from "micro-reactive";`;
+// 替换
+const hackUpdateComputation = `
+const update = updateComputation
+updateComputation = function (node) {
+  const self = this
+  useEffect(() => update.call(self, node))
+}
+`;
+export default function TrackEffect() {
+  return {
+    name: "track-effect",
+    transform(src: string, id: string) {
+      if (fileRegex.test(id) && funcRegex.test(src)) {
+        return { code: importUseEffect + src + hackUpdateComputation };
+      }
+    },
+  };
+}
 ```
 
 ### 替换嵌入到 `vue3` 中 [(with vue3)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/vue3)

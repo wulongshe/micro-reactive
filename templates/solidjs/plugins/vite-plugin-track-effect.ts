@@ -1,5 +1,5 @@
 /* 使用 useEffect 收集组件更新方法 */
-const fileRegex = /\.(cjs|js|ts)/
+const fileRegex = /\.(cjs|mjs|js|ts)/
 const funcRegex = /function updateComputation/
 // 导入
 const importUseEffect = `
