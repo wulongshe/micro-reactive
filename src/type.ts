@@ -32,6 +32,7 @@ export type EffectFunction<T extends any[] = [], R = void> = (...args: T) => R
 export type Option<T> = {
   reactiveMap: ReactiveMap<T>
   effects: Set<EffectFunction>
+  self: Reactive<T>
   value: T
 }
 

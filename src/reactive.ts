@@ -29,8 +29,9 @@ export function useReactive<T>(value: T): Reactive<T> {
   const option: Option<T> = {
     reactiveMap: new Map(),
     effects: new Set(),
+    self: null as any,
     value
   }
   const signal = createSignal(option)
-  return createProxy(signal, option)
+  return option.self = createProxy(signal, option)
 }
