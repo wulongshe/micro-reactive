@@ -6,9 +6,7 @@ import App from './App.vue'
 // hack ReactiveEffect
 const hackRun = ReactiveEffect.prototype.run
 ReactiveEffect.prototype.run = function () {
-  let value: any
-  useEffect(() => value = hackRun.call(this))
-  return value
+  return useEffect(() => hackRun.call(this))
 }
 
 createApp(App).mount('#app')

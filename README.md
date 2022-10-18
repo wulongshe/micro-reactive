@@ -174,15 +174,13 @@ const count = useReactive(0);
 
 ```ts
 /* main.ts 中添加以下代码 */
-import { createApp, ReactiveEffect } from "vue";
+import { ReactiveEffect } from "vue";
 import { useEffect } from "micro-reactive";
 
 // hack ReactiveEffect
 const hackRun = ReactiveEffect.prototype.run;
 ReactiveEffect.prototype.run = function () {
-  let value: any;
-  useEffect(() => value = hackRun.call(this));
-  return value;
+  return useEffect(() => hackRun.call(this));
 }
 ```
 
