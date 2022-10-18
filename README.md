@@ -22,7 +22,7 @@ const data = useReactive({ id: 1, value: 0 });
 data({ id: 2, value: 1 });
 // 链式调用
 data.id(3);
-console.log(data()); // { id: 3, value: -1 }
+console.log(data()); // { id: 3, value: 1 }
 // 直接解构，不需要 toRefs() 操作
 const { value } = data;
 value(-1);
@@ -36,7 +36,7 @@ let data = reactive({ id: 1, value: 0 });
 data = reactive({ id: 2, value: 1 });
 // 链式调用
 data.id = 3;
-console.log(data); // { id: 3, value -1 }
+console.log(data); // { id: 3, value 1 }
 // 解构
 const { value } = toRefs(data);
 value.value = -1;
@@ -52,7 +52,7 @@ setData((data) => {
   data.id = 3;
   return data;
 });
-console.log(data()); // { id: 3, value -1 }
+console.log(data()); // { id: 3, value 1 }
 // solid 原生不支持解构
 ```
 
