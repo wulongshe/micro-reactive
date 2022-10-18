@@ -1,6 +1,6 @@
 import { EffectFunction } from './type'
 
-let currentEffect: EffectFunction | null = null
+const effectStack: EffectFunction[] = []
 const cache: Array<EffectFunction> = []
 
 // 清空依赖缓存
@@ -12,8 +12,8 @@ export function clear() {
 
 // 跟踪依赖
 export function track(effects: Set<EffectFunction>) {
-  if (currentEffect) {
-    effects.add(currentEffect)
+  if (effectStack.length) {
+    effects.add(effectStack[effectStack.length - 1])
   }
 }
 
@@ -27,8 +27,8 @@ export function trigger(effects: Set<EffectFunction>) {
 }
 
 export function useEffect<T extends [], R>(effect: EffectFunction<T, R>, ...args: T): R {
-  currentEffect = effect
+  effectStack.push(effect)
   const value = effect(...args)
-  currentEffect = null
+  effectStack.pop()
   return value
 }
