@@ -27,7 +27,7 @@ export type ReadonlyReactive<T> = ReadonlySignal<T> &
 
 export type ReactiveMap<T> = Map<keyof T, Reactive<T[keyof T]>>
 
-export type EffectFunction = (...args: any[]) => any
+export type EffectFunction<T extends any[] = [], R = void> = (...args: T) => R
 
 export type Option<T> = {
   reactiveMap: ReactiveMap<T>
