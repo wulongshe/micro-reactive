@@ -206,7 +206,7 @@ export default function Counter() {
 import { useEffect } from "micro-reactive";
 import { useState } from "react";
 
-const stateMap = new Map();
+const stateMap = new WeakMap();
 
 export function defineState<T extends {} | []>(defineReactive: () => T): T {
   const setter = useState({})[1];
