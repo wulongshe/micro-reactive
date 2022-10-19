@@ -1,22 +1,28 @@
 import { track, trigger } from './effect'
 import type { Signal, Option } from './type'
 
-const NULL = Symbol('NULL')
+const NULL = Symbol('NULL') as any
+const onlyTrigger = Symbol('onlyTrigger') as any
 
-export function read<T>({ effects, reactiveMap, value }: Option<T>): T {
-  track(effects)
+export function read<T>({ effects, reactiveMap, get }: Option<T>): T {
+  if (!track(effects)) {
+    return get()
+  }
   if (reactiveMap instanceof Map) {
-    for (const [key, reactive] of reactiveMap) {
-      value[key] = reactive() as T[typeof key]
+    for (const [, reactive] of reactiveMap) {
+      reactive()
     }
   }
-  return value
+  return get()
 }
 
-export function write<T>({ effects, reactiveMap, value }: Option<T>) {
+export function write<T>({ effects, reactiveMap, set }: Option<T>, value: T) {
+  if (value !== onlyTrigger) {
+    set(value)
+  }
   if (reactiveMap instanceof Map) {
-    for (const [key, reactive] of reactiveMap) {
-      reactive(value[key])
+    for (const [, reactive] of reactiveMap) {
+      reactive(onlyTrigger)
     }
   }
   trigger(effects)
@@ -30,10 +36,10 @@ export function createSignal<T>(option: Option<T>): Signal<T> {
    */
   function signal<T>(): T
   function signal<T>(value: T): void
-  function signal(value = NULL as any) {
+  function signal(value = NULL) {
     return NULL === value
       ? read(option)
-      : (option.value = value, write(option))
+      : write(option, value)
   }
   return signal
 }
