@@ -4,7 +4,7 @@
 
 > Reactive core based on `Function` and `Proxy`
 
-## API文档
+## API 文档
 
 > [点此查看](https://github.com/Yuki-0505/micro-reactive/blob/master/API.md)
 
@@ -185,6 +185,50 @@ import { useEffect } from "micro-reactive";
 const hackRun = ReactiveEffect.prototype.run;
 ReactiveEffect.prototype.run = function () {
   return useEffect(() => hackRun.call(this));
+};
+```
+
+### 替换嵌入到 `react` 中 [(with react)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/react)
+
+```ts
+import { useReactive } from "micro-reactive";
+// 引入 hack
+import { defineState } from "../hacks/defineState";
+
+export default function Counter() {
+  const [count] = defineState(() => [useReactive(0)]);
+  return <button onClick={() => count(count() + 1)}>count is {count()}</button>;
+}
+```
+
+```ts
+/* defineState.ts */
+import { useEffect } from "micro-reactive";
+import { useState } from "react";
+
+const stateMap = new Map();
+
+export function defineState<T extends {} | []>(defineReactive: () => T): T {
+  const setter = useState({})[1];
+  if (!setter) throw new Error("setter is empty");
+  if (stateMap.has(setter)) {
+    return stateMap.get(setter);
+  }
+  const state = useEffect(() => {
+    setter({});
+    if (stateMap.has(setter)) {
+      return stateMap.get(setter);
+    }
+    const ret = defineReactive();
+    for (const key in ret) {
+      if (typeof ret[key] === "function") {
+        (ret[key] as Function)();
+      }
+    }
+    return ret;
+  });
+  stateMap.set(setter, state);
+  return state;
 }
 ```
 
