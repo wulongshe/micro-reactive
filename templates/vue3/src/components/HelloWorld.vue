@@ -12,7 +12,7 @@ defineProps<{ msg: string }>()
     <Counter></Counter>
     <p>
       Edit
-      <code>components/HelloWorld.vue</code> to test HMR
+      <code>components/MicroCounter.vue</code> to test HMR
     </p>
   </div>
 
