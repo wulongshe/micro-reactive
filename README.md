@@ -70,15 +70,20 @@ pnpm i micro-reactive
 ## 尝试
 
 - [RunKit 在线运行](https://npm.runkit.com/micro-reactive)
-- 替换嵌入到 solid 项目中运行
+- 嵌入到 solid 项目中运行
   - 下载仓库到本地 [download link](https://codeload.github.com/Yuki-0505/micro-reactive/zip/refs/heads/master)
   - 在终端中进入 `micro-reactive/templates/solidjs` 目录
-  - 使用 `pnpm i` 安装依赖
+  - `pnpm i` 安装依赖
   - `pnpm dev` 启动项目
-- 替换嵌入到 vue3 项目中运行
+- 嵌入到 vue3 项目中运行
   - 下载仓库到本地 [download link](https://codeload.github.com/Yuki-0505/micro-reactive/zip/refs/heads/master)
   - 在终端中进入 `micro-reactive/templates/vue3` 目录
-  - 使用 `pnpm i` 安装依赖
+  - `pnpm i` 安装依赖
+  - `pnpm dev` 启动项目
+- 嵌入到 react 项目中运行
+  - 下载仓库到本地 [download link](https://codeload.github.com/Yuki-0505/micro-reactive/zip/refs/heads/master)
+  - 在终端中进入 `micro-reactive/templates/react` 目录
+  - `pnpm i` 安装依赖
   - `pnpm dev` 启动项目
 
 ## 案例
