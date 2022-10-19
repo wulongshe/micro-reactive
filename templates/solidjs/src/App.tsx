@@ -1,7 +1,7 @@
 import './style.css'
 import typescriptLogo from './typescript.svg'
-// import Counter from './components/counter'
-import Counter from './components/micro-counter'
+// import Counter from './components/Counter'
+import Counter from './components/MicroCounter'
 
 export default function App() {
   return (
@@ -9,10 +9,10 @@ export default function App() {
       <a href="https://vitejs.dev" target="_blank">
         <img src="/vite.svg" className="logo" alt="Vite logo" />
       </a>
-      <a href="https://www.typescriptlang.org/" target="_blank">
+      <a href="https://www.solidjs.com/" target="_blank">
         <img src={typescriptLogo} className="logo vanilla" alt="TypeScript logo" />
       </a>
-      <h1>Vite + TypeScript</h1>
+      <h1>Vite + Solidjs</h1>
       <div className="card">
         <Counter></Counter>
       </div>

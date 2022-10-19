@@ -4,14 +4,14 @@ specifiers:
   '@types/react': ^18.0.17
   '@types/react-dom': ^18.0.6
   '@vitejs/plugin-react': ^2.1.0
-  micro-reactive: ^1.6.0
+  micro-reactive: ^2.0.0
   react: ^18.2.0
   react-dom: ^18.2.0
   typescript: ^4.6.4
   vite: ^3.1.0
 
 dependencies:
-  micro-reactive: 1.6.3
+  micro-reactive: 2.0.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
 
@@ -741,8 +741,8 @@ packages:
       sourcemap-codec: 1.4.8
     dev: true
 
-  /micro-reactive/1.6.3:
-    resolution: {integrity: sha512-yGv2bCmuHiHCFXZaEpL6XOU1345Y9npEpn8CRzeWWRU+jTHiv/URX69RMPokWCIcZFO/rTJrq1jq1OOVhdjUIQ==}
+  /micro-reactive/2.0.0:
+    resolution: {integrity: sha512-VWg1zEnAWIwedWUnEXdo/+gsxXXt3Dt5h2mA8VDezCQsEwSeFOzLYXCFw9DCXMPVlKSAnfiFSD0hCNF1Y4FcpQ==}
     engines: {node: '>=14.20.0'}
     dev: false
 
