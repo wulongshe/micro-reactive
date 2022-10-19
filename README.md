@@ -4,6 +4,10 @@
 
 > Reactive core based on `Function` and `Proxy`
 
+## API文档
+
+> [点此查看](https://github.com/Yuki-0505/micro-reactive/blob/master/API.md)
+
 ## 优势
 
 - 基于 `Function` 和 `Proxy` 实现的响应式。
@@ -131,7 +135,7 @@ export default defineConfig({
 ```
 
 ```ts
-/* vite-plugin-track-effect */
+/* vite-plugin-track-effect.ts */
 // 使用 useEffect 收集组件更新方法
 const fileRegex = /\.(cjs|mjs|js|ts)/;
 const funcRegex = /function updateComputation/;
