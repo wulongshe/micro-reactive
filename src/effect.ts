@@ -11,10 +11,13 @@ export function clear() {
 }
 
 // 跟踪依赖
-export function track(effects: Set<EffectFunction>) {
+export function track(effects: Set<EffectFunction>): boolean {
   if (effectStack.length) {
-    effects.add(effectStack[effectStack.length - 1])
+    const effect = effectStack[effectStack.length - 1]
+    if (effects.has(effect)) return false
+    effects.add(effect)
   }
+  return true
 }
 
 // 触发依赖
