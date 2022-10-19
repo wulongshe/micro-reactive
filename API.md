@@ -10,7 +10,7 @@ function useReactive<T>(value: T): Reactive<T>;
 
 - Reactive
 
-> 本质是一个函数`Function`，能对值`value`进行读写操作。 同时又对其进行了`Proxy`代理，使其能通过 `.` 的方式或者结构的方式得到下一级属性。
+> 本质是一个函数`Function`，能对值`value`进行读写操作。 同时又对其进行了`Proxy`代理，使其能通过 `.` 的方式或者解构的方式得到下一级属性。
 
 ```ts
 /* 定义 */
@@ -166,7 +166,7 @@ const cube = useComputed({
 console.log(cube()) // 8
 
 data(4)
-console.log(square()) // 8
+console.log(square()) // 16
 console.log(cube()) // 64
 console.log(doubleCube) // 128
 ```
