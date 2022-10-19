@@ -196,13 +196,21 @@ ReactiveEffect.prototype.run = function () {
 ### 替换嵌入到 `react` 中 [(with react)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/react)
 
 ```ts
-import { useReactive } from "micro-reactive";
+import { useComputed, useReactive } from "micro-reactive";
 // 引入 hack
 import { defineState } from "../hacks/defineState";
 
 export default function Counter() {
+  // useReactive 声明变量需写在 defineState 中
   const [count] = defineState(() => [useReactive(0)]);
-  return <button onClick={() => count(count() + 1)}>count is {count()}</button>;
+  // 计算属性
+  const double = useComputed(() => count() * 2);
+
+  return (
+    <button onClick={() => count(count() + 1)}>
+      double count is {double()}
+    </button>
+  );
 }
 ```
 
