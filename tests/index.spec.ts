@@ -32,3 +32,16 @@ test('Destructuring', async () => {
   expect(count()).toBe(5)
   expect(cube()).toBe(27)
 })
+
+test('Array', async () => {
+  const arr = useReactive([0, 1, 2, 3, 4, 5])
+
+  expect(arr()).toEqual([0, 1, 2, 3, 4, 5])
+
+  arr[3](8)
+  expect(arr()).toEqual([0, 1, 2, 8, 4, 5])
+
+  expect(arr[6]()).toBe(undefined)
+  arr[6](6)
+  expect(arr()).toEqual([0, 1, 2, 8, 4, 5, 6])
+})
