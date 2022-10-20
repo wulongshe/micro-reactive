@@ -1,13 +1,14 @@
 import { test, expect } from 'vitest'
 import { createSignal } from '../src/signal'
 import { parsePath } from '../src/utils'
-import { Option, ReactiveMap } from '../src/type'
+import type { Option } from '../src/type'
 
 test('[signal]', async () => {
   const value = { a: 1 }
   const option: Option<typeof value> = {
-    reactiveMap: {} as ReactiveMap<typeof value>,
+    reactiveMap: new Map(),
     effects: new Set(),
+    parent: null,
     path: '0',
     ...parsePath('0'),
   }
