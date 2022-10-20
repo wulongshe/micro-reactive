@@ -1,4 +1,4 @@
-import { EffectFunction } from './type'
+import type { EffectFunction } from './type'
 
 const effectStack: EffectFunction[] = []
 const cache: Array<EffectFunction> = []
