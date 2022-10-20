@@ -1,31 +1,36 @@
 import { track, trigger } from './effect'
-import type { Signal, Option } from './type'
+import type { Signal, Option, ReactiveMap } from './type'
 
 const NULL = Symbol('NULL') as any
-const onlyTrigger = Symbol('onlyTrigger') as any
+const TriggerChildren = Symbol('triggerChildren') as any
 
-export function read<T>({ effects, reactiveMap, get }: Option<T>): T {
-  if (!track(effects)) {
-    return get()
-  }
-  if (reactiveMap instanceof Map) {
-    for (const [, reactive] of reactiveMap) {
-      reactive()
-    }
-  }
+export function read<T>({ effects, get }: Option<T>): T {
+  track(effects)
   return get()
 }
 
-export function write<T>({ effects, reactiveMap, set }: Option<T>, value: T) {
-  if (value !== onlyTrigger) {
+export function write<T>({ effects, reactiveMap, parent, set }: Option<T>, value: T) {
+  if (value !== TriggerChildren) {
+    triggerParent(parent)
     set(value)
   }
+  triggerChildren(reactiveMap)
+  trigger(effects)
+}
+
+export function triggerParent(option: Option<any> | null) {
+  if (!option) return
+  const { parent, effects } = option
+  triggerParent(parent)
+  trigger(effects)
+}
+
+export function triggerChildren<T>(reactiveMap: ReactiveMap<T>) {
   if (reactiveMap instanceof Map) {
     for (const [, reactive] of reactiveMap) {
-      reactive(onlyTrigger)
+      reactive(TriggerChildren)
     }
   }
-  trigger(effects)
 }
 
 export function createSignal<T>(option: Option<T>): Signal<T> {
