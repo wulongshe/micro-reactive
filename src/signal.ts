@@ -14,8 +14,8 @@ export function write<T>({ effects, reactiveMap, parent, set }: Option<T>, value
     triggerParent(parent)
     set(value)
   }
-  triggerChildren(reactiveMap)
   trigger(effects)
+  triggerChildren(reactiveMap)
 }
 
 export function triggerParent(option: Option<any> | null) {
