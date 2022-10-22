@@ -1,24 +1,10 @@
 import { useEffect } from './effect'
 import { useReactive } from './reactive'
-import type { Getter, Setter, ComputedProp, Computed } from './type'
+import type { Accessor, Reactive } from './type'
 
-export function useComputed<T>(accessor: ComputedProp<T>): Computed<ComputedProp<T>> {
+export function useComputed<T>({ get, set }: Accessor<T>): Reactive<T> {
   const data = useReactive<T>(null as unknown as T)
-  let get: Getter<T>, set: Setter<T>
-  if (typeof accessor === 'function') {
-    get = accessor
-    set = () => { }
-  } else if (typeof accessor === 'object') {
-    ({
-      get = () => null as unknown as T,
-      set = () => { }
-    } = accessor)
-  }
-  useEffect(() => {
-    data(get())
-  })
-  useEffect(() => {
-    set(data())
-  })
+  useEffect(() => data(get()))
+  useEffect(() => set(data()))
   return data
 }
