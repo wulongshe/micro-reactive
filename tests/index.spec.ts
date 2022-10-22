@@ -4,7 +4,7 @@ import { useReactive, useComputed } from '../src'
 test('Destructuring', async () => {
   const state = useReactive({ count: 1, value: 'value' })
   // 只读计算属性
-  const double = useComputed(() => state.count() * 2)
+  const double = () => state.count() * 2
   const { count } = state
 
   expect(state()).toEqual({ count: 1, value: 'value' })

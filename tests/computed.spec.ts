@@ -1,12 +1,11 @@
 import { test, expect } from 'vitest'
-import { useComputed } from '../src/computed'
 import { useReactive } from '../src/reactive'
 
 test('[computed]', async () => {
   const firstName = useReactive('wulong')
   const secondName = useReactive('she')
 
-  const fillName = useComputed(() => firstName() + secondName())
+  const fillName = () => firstName() + secondName()
 
   expect(fillName()).toBe('wulongshe')
 

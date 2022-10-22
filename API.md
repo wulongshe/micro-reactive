@@ -146,17 +146,8 @@ let doubleCube = NaN
 
 // 只读计算属性
 const square = () => data() * data()
-// or
-// const square = useComputed(() => data() * data())
-// or
-/*
-const square = useComputed({
-  get() {
-    return data() * data()
-  }
-})
 console.log(square()) // 4
-*/
+
 // 可写计算属性
 const cube = useComputed({
   get() {
