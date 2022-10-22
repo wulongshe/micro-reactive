@@ -1,15 +1,18 @@
 <script setup lang="ts">
 // import Counter from './Counter.vue'
 import Counter from './MicroCounter.vue'
+import { useReactive } from 'micro-reactive';
 
 defineProps<{ msg: string }>()
+const count = useReactive(0)
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
 
+  <input type="number" v-micro="count">
   <div class="card">
-    <Counter></Counter>
+    <Counter :count="count"></Counter>
     <p>
       Edit
       <code>components/MicroCounter.vue</code> to test HMR
