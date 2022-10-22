@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { useReactive } from 'micro-reactive'
+import type { Reactive } from 'micro-reactive'
 
-const count = useReactive(0)
+defineProps<{
+  count: Reactive<number>
+}>()
 </script>
 
 <template>

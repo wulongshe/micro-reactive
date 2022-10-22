@@ -1,5 +1,6 @@
 import { createApp, ReactiveEffect } from 'vue'
 import { useEffect } from 'micro-reactive'
+import { micro } from './directives/micro'
 import './style.css'
 import App from './App.vue'
 
@@ -9,4 +10,6 @@ ReactiveEffect.prototype.run = function () {
   return useEffect(hackRun.bind(this))
 }
 
-createApp(App).mount('#app')
+const app = createApp(App)
+app.directive('micro', micro)
+app.mount('#app')
