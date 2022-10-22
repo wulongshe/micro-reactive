@@ -16,8 +16,9 @@ export function defineState<T extends {} | []>(defineReactive: () => T): T {
     }
     const ret = defineReactive()
     for (const key in ret) {
-      if (typeof ret[key] === 'function') {
-        (ret[key] as Function)()
+      const reactive = ret[key]
+      if (typeof reactive === 'function') {
+        reactive()
       }
     }
     return ret
