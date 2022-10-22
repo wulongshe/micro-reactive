@@ -1,5 +1,5 @@
 import { createSignal } from './signal'
-import { getId, parsePath, state } from './utils'
+import { getId, parsePath, state } from './state'
 import type { Reactive, Signal, Option } from './type'
 
 export function createProxy<T>(signal: Signal<T>, option: Option<T>) {
