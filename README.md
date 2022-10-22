@@ -204,8 +204,8 @@ import { defineState } from "../hacks/defineState";
 export default function Counter() {
   // useReactive 声明变量需写在 defineState 中
   const [count] = defineState(() => [useReactive(0)]);
-  // 计算属性
-  const double = useComputed(() => count() * 2);
+  // 只读计算属性
+  const double = () => count() * 2
 
   return (
     <button onClick={() => count(count() + 1)}>
