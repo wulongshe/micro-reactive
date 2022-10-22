@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest'
-import { getId, parsePath } from '../src/utils'
+import { getId, parsePath } from '../src/state'
 
 test('[utils]: getId', async () => {
   expect(getId()).toBe('0')

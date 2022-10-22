@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest'
 import { createSignal } from '../src/signal'
-import { parsePath } from '../src/utils'
+import { parsePath } from '../src/state'
 import type { Option } from '../src/type'
 
 test('[signal]', async () => {

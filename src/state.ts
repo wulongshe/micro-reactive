@@ -1,6 +1,6 @@
-export const getId = ((id = 0) => () => String(id++))()
-
 export const state: any = {}
+
+export const getId = ((id = 0) => () => String(id++))()
 
 export function parsePath(path: string) {
   const segments = path.split('.')
