@@ -3,7 +3,7 @@ export type Setter<T> = (value: T) => void
 
 export type Accessor<T> = {
   get: Getter<T>
-  set: Setter<T>
+  set?: Setter<T>
 }
 
 export interface Signal<T> {
