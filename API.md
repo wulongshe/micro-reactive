@@ -114,21 +114,14 @@ data1(4)
 // { val1: 4, val2: 2 }
 ```
 
-## useComputed
+## useComputed & useMemo
 
-> 计算属性，可根据需要设置为只读计算属性或可写计算属性
+> 计算属性和缓存，可根据需要设置为只读计算属性或可写计算属性
 
 ```ts
 /* 定义 */
-function useComputed<T>(accessor: ComputedProp<T>): Computed<typeof accessor>;
-
-type ComputedProp<T> = Getter<T> | Accessor<T>;
-
-type Computed<T extends Getter<any> | Accessor<any>> = T extends Getter<infer V>
-  ? ReadonlyReactive<V>
-  : T extends Accessor<infer U>
-  ? Reactive<U>
-  : never;
+function useComputed<T>(accessor: Accessor<T>): Reactive<T>;
+function useMemo<T>(getter: Getter<T>): Getter<T>;
 
 type Getter<T> = () => T;
 type Setter<T> = (value: T) => void;
@@ -144,11 +137,11 @@ type Accessor<T> = {
 const data = useReactive(2)
 let doubleCube = NaN
 
-// 只读计算属性
-const square = () => data() * data()
+// 具有缓存功能的只读计算属性
+const square = useMemo(() => data() * data())
 console.log(square()) // 4
 
-// 可写计算属性
+// 具有缓存功能的可写计算属性
 const cube = useComputed({
   get() {
     return data() * data() * data()
