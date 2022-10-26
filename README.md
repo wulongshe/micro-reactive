@@ -254,4 +254,6 @@ export function defineState<T extends {} | []>(defineReactive: () => T): T {
 - [signal](https://github.com/Yuki-0505/micro-reactive/blob/master/tests/signal.spec.ts)
 - [reactive](https://github.com/Yuki-0505/micro-reactive/blob/master/tests/reactive.spec.ts)
 - [computed](https://github.com/Yuki-0505/micro-reactive/blob/master/tests/computed.spec.ts)
+- [memo](https://github.com/Yuki-0505/micro-reactive/blob/master/tests/memo.spec.ts)
 - [watch](https://github.com/Yuki-0505/micro-reactive/blob/master/tests/watch.spec.ts)
+- [state](https://github.com/Yuki-0505/micro-reactive/blob/master/tests/state.spec.ts)
