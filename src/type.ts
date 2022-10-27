@@ -3,7 +3,7 @@ export type Setter<T> = (value: T) => void
 
 export type Accessor<T> = {
   get: Getter<T>
-  set?: Setter<T>
+  set: Setter<T>
 }
 
 export interface Signal<T> {
@@ -14,6 +14,11 @@ export interface Signal<T> {
 export type Reactive<T> = Signal<T> &
   (T extends object
     ? { readonly [key in keyof T]: Reactive<T[key]> }
+    : {})
+
+export type ReadonlyReactive<T> = Getter<T> &
+  (T extends object
+    ? { readonly [key in keyof T]: ReadonlyReactive<T[key]> }
     : {})
 
 export type ReactiveMap<T> = Map<keyof T, Reactive<T[keyof T]>>
