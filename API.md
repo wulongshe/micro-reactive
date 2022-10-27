@@ -120,6 +120,7 @@ data1(4)
 
 ```ts
 /* 定义 */
+function useComputed<T>(getter: Getter<T>): ReadonlyReactive<T>;
 function useComputed<T>(accessor: Accessor<T>): Reactive<T>;
 function useMemo<T>(getter: Getter<T>): Getter<T>;
 
@@ -128,7 +129,7 @@ type Setter<T> = (value: T) => void;
 
 type Accessor<T> = {
   get: Getter<T>;
-  set?: Setter<T>;
+  set: Setter<T>;
 };
 ```
 
@@ -137,11 +138,16 @@ type Accessor<T> = {
 const data = useReactive(2)
 let doubleCube = NaN
 
-// 具有缓存功能的只读计算属性
-const square = useMemo(() => data() * data())
+// 无缓存计算属性
+// const square = () => data() * data()
+// 有缓存计算属性
+// const square = useMemo(() => data() * data())
+
+// 只读计算属性
+const square = useComputed(() => data() * data())
 console.log(square()) // 4
 
-// 具有缓存功能的可写计算属性
+// 可写计算属性
 const cube = useComputed({
   get() {
     return data() * data() * data()
