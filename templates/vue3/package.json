@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "micro-reactive": "2.0.1",
+    "micro-reactive": "latest",
     "vue": "^3.2.37"
   },
   "devDependencies": {
