@@ -1,6 +1,6 @@
 {
   "name": "micro-reactive",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "author": "shewulong",
   "license": "MIT",
   "description": "Reactive core based on Function and Proxy",
