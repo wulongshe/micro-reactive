@@ -62,6 +62,10 @@ export type Options<
     actions?: (state: Reactive<S>, getters: G) => A
   }
 
+export type Computes<T extends Getters> = {
+  readonly [key in keyof T]: T[key] extends () => infer R ? ReadonlyReactive<R> : never
+}
+
 export type Store<
   Id extends string,
   S extends object,
@@ -69,5 +73,5 @@ export type Store<
   A extends Actions,
   > = { $id: Id }
   & Reactive<S>
-  & Readonly<G>
+  & Computes<G>
   & Readonly<A>
