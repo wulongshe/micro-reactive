@@ -54,6 +54,12 @@ test('[reactive]: object', async () => {
   expect(data2).toEqual({ a: 3, b: 2 })
 })
 
+test('[reactive]: object patch', async () => {
+  const data = useReactive({ a: 1, b: 2 })
+  data({ a: 3 }, true)
+  expect(data()).toEqual({ a: 3, b: 2 })
+})
+
 test('[reactive]: object key', async () => {
   const data = useReactive({ a: 1, b: 1, c: 1 })
   let clone: any

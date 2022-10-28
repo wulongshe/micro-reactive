@@ -18,6 +18,8 @@ function useReactive<T>(value: T): Reactive<T>;
 function Reactive<T>(): T;
 // write
 function Reactive<T>(value: T): void;
+// patch
+function Reactive<T>(value: Partial<T>, patch: boolean): void;
 // proxy property
 type Reactive<T> = {
   readonly [key in keyof T]: Reactive<T[key]>;
