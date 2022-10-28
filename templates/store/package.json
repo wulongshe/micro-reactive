@@ -13,6 +13,6 @@
     "vite": "^3.1.0"
   },
   "dependencies": {
-    "micro-reactive": "^2.2.4"
+    "micro-reactive": "^2.2.5"
   }
 }

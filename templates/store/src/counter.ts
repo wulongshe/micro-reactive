@@ -1,13 +1,12 @@
-import { count, double, increase, square } from './module'
 import { useEffect } from 'micro-reactive'
+// import { count, double, increase, square } from './module'
+import { store } from './options'
+const { count, double, increase, square } = store
 
 export function setupCounter(element: HTMLButtonElement) {
-  const eleCount = element.querySelector('#count')!
-  const eleDouble = element.querySelector('#double')!
-  const eleSquare = element.querySelector('#square')!
-  eleCount.addEventListener('click', increase)
+  element.addEventListener('click', increase)
 
-  useEffect(() => eleCount.innerHTML = `count is ${count()}`)
-  useEffect(() => eleDouble.innerHTML = `double is ${double()}`)
-  useEffect(() => eleSquare.innerHTML = `square is ${square()}`)
+  useEffect(() => element.innerHTML = `count is ${count()}`)
+  useEffect(() => console.log(`double is ${double()}`))
+  useEffect(() => console.log(`square is ${square()}`))
 }

@@ -1,5 +1,6 @@
 import { expect, describe, it } from 'vitest'
 import { defineStore } from '../src/store'
+import type { ReadonlyReactive } from '../src/type'
 
 describe('options', () => {
   it('state', async () => {
@@ -75,7 +76,7 @@ describe('options', () => {
           { id: 1, pid: 0, value: 1 },
           { id: 2, pid: 1, value: 2 },
           { id: 3, pid: 1, value: 3 },
-        ]
+        ] as ListNode[]
       }),
       getters: (state) => ({
         double: () => state.count() * 2,
@@ -103,5 +104,8 @@ describe('options', () => {
         { value: 3 },
       ]
     }])
+    const tree = store.tree as ReadonlyReactive<TreeNode[]>
+    if (!tree) return
+    expect(tree[0].value()).toBe(1)
   })
 })
