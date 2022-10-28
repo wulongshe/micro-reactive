@@ -1,8 +1,8 @@
+import { useComputed } from './computed'
 import { useEffect } from './effect'
 import type { Getter } from './type'
 
 export function useMemo<T>(getter: Getter<T>): Getter<T> {
-  let data = null as unknown as T
-  useEffect(() => data = getter())
-  return () => (getter(), data)
+  const data = useComputed(getter)
+  return () => data()
 }
