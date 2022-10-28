@@ -9,10 +9,10 @@ export function read<T>({ effects, get }: Option<T>): T {
   return get()
 }
 
-export function write<T>({ effects, reactiveMap, parent, set }: Option<T>, value: T) {
+export function write<T>({ effects, reactiveMap, parent, set }: Option<T>, value: T, patch: boolean) {
   if (value !== TriggerChildren) {
     triggerParent(parent)
-    set(value)
+    set(value, patch)
   }
   trigger(effects)
   triggerChildren(reactiveMap)
@@ -41,10 +41,11 @@ export function createSignal<T>(option: Option<T>): Signal<T> {
    */
   function signal<T>(): T
   function signal<T>(value: T): void
-  function signal(value = NULL) {
+  function signal<T>(value: Partial<T>, patch: boolean): void
+  function signal(value = NULL, patch = false) {
     return NULL === value
       ? read(option)
-      : write(option, value)
+      : write(option, value, patch)
   }
   return signal
 }

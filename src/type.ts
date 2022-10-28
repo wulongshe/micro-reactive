@@ -9,6 +9,7 @@ export type Accessor<T> = {
 export interface Signal<T> {
   (): T
   (value: T): void
+  (value: Partial<T>, patch: boolean): void
 }
 
 export type Reactive<T> = Signal<T> &
@@ -31,7 +32,7 @@ export type Option<T> = {
   effects: Set<EffectFunction>
   path: string
   get: Getter<T>
-  set: Setter<T>
+  set: Setter<T> | ((value: Partial<T>, patch: boolean) => void)
 }
 
 export type ReactiveType<T> =
