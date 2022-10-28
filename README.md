@@ -71,17 +71,22 @@ pnpm i micro-reactive
 ## 尝试
 
 - [RunKit 在线运行](https://npm.runkit.com/micro-reactive)
-- 嵌入到 solid 项目中运行
+- 将该响应式库用于全局状态管理(options or setup module)
+  - 下载仓库到本地 [download link](https://codeload.github.com/Yuki-0505/micro-reactive/zip/refs/heads/master)
+  - 在终端中进入 `micro-reactive/templates/store` 目录
+  - `pnpm i` 安装依赖
+  - `pnpm dev` 启动项目
+- 在 solid 项目中运行
   - 下载仓库到本地 [download link](https://codeload.github.com/Yuki-0505/micro-reactive/zip/refs/heads/master)
   - 在终端中进入 `micro-reactive/templates/solidjs` 目录
   - `pnpm i` 安装依赖
   - `pnpm dev` 启动项目
-- 嵌入到 vue3 项目中运行
+- 在 vue3 项目中运行
   - 下载仓库到本地 [download link](https://codeload.github.com/Yuki-0505/micro-reactive/zip/refs/heads/master)
   - 在终端中进入 `micro-reactive/templates/vue3` 目录
   - `pnpm i` 安装依赖
   - `pnpm dev` 启动项目
-- 嵌入到 react 项目中运行
+- 在 react 项目中运行
   - 下载仓库到本地 [download link](https://codeload.github.com/Yuki-0505/micro-reactive/zip/refs/heads/master)
   - 在终端中进入 `micro-reactive/templates/react` 目录
   - `pnpm i` 安装依赖
@@ -110,7 +115,38 @@ console.log(double); // 6
 
 ## 模板
 
-### 替换嵌入到 `solid js` 中 [(with solid js)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/solidjs)
+### 用于全局状态管理 [(microx store)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/store)
+
+```ts
+/* options */
+import { defineStore } from "micro-reactive";
+
+export const store = defineStore({
+  id: "counter",
+  state: () => ({
+    count: 0,
+  }),
+  getters: ({ count }) => ({
+    double: () => count() * 2,
+  }),
+  actions: ({ count }, getters) => ({
+    increase: () => count(count() + 1),
+  }),
+});
+```
+
+```ts
+/* setup module */
+import { useComputed, useMemo, useReactive } from "micro-reactive";
+
+export const count = useReactive(0);
+export const double = useMemo(() => count() * 2);
+export function increase() {
+  count(count() + 1);
+}
+```
+
+### 在 `solid js` 中运行 [(with solid js)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/solidjs)
 
 ```ts
 /* micro-counter.tsx */
@@ -165,7 +201,7 @@ export default function TrackEffect() {
 }
 ```
 
-### 替换嵌入到 `vue3` 中 [(with vue3)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/vue3)
+### 在 `vue3` 中运行 [(with vue3)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/vue3)
 
 ```vue
 /* MicroCounter.vue */
@@ -194,7 +230,7 @@ ReactiveEffect.prototype.run = function () {
 };
 ```
 
-### 替换嵌入到 `react` 中 [(with react)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/react)
+### 在 `react` 中运行 [(with react)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/react)
 
 ```ts
 import { useComputed, useReactive } from "micro-reactive";
@@ -205,7 +241,7 @@ export default function Counter() {
   // useReactive 声明变量需写在 defineState 中
   const [count] = defineState(() => [useReactive(0)]);
   // 只读计算属性
-  const double = () => count() * 2
+  const double = () => count() * 2;
 
   return (
     <button onClick={() => count(count() + 1)}>
