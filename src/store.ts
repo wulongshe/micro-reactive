@@ -1,6 +1,6 @@
 import { useReactive } from './reactive'
-import { useMemo } from './memo'
 import type { Actions, Getters, Options, Store } from './type'
+import { useComputed } from './computed'
 
 export function defineStore<
   Id extends string,
@@ -16,7 +16,7 @@ export function defineStore<
   const gets = getters ? getters(store) : {} as G
   const acts = actions ? actions(store, gets) : {} as A
   for (const key in gets) {
-    store[key] = useMemo(gets[key])
+    store[key] = useComputed(gets[key])
   }
   for (const key in acts) {
     store[key] = acts[key]
