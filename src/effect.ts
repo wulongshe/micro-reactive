@@ -13,7 +13,9 @@ export function clear() {
 // 跟踪依赖
 export function track(effects: Set<EffectFunction>): boolean {
   if (effectStack.length) {
-    effectStack.forEach(effect => effects.add(effect))
+    const effect = effectStack[effectStack.length - 1]
+    if (effects.has(effect)) return false
+    effects.add(effect)
   }
   return true
 }
