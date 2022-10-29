@@ -14,12 +14,12 @@ export interface Signal<T> {
 
 export type Reactive<T> = Signal<T> &
   (T extends object
-    ? { readonly [key in keyof T]: Reactive<T[key]> }
+    ? { readonly [key in keyof T]: Reactive<T[key]> } & Readonly<T>
     : {})
 
 export type ReadonlyReactive<T> = Getter<T> &
   (T extends object
-    ? { readonly [key in keyof T]: ReadonlyReactive<T[key]> }
+    ? { readonly [key in keyof T]: ReadonlyReactive<T[key]> } & Readonly<T>
     : {})
 
 export type ReactiveMap<T> = Map<keyof T, Reactive<T[keyof T]>>

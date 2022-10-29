@@ -19,6 +19,16 @@ export function createProxy<T>(signal: Signal<T>, option: Option<T>) {
       // 非对象类型的值，不能索引出属性
       if (typeof value !== 'object' || value === null) return void 0
 
+      // 对象本身的属性
+      const property = Reflect.get(value as unknown as object, key)
+      if (typeof property === 'function') {
+        return (...args: any[]) => {
+          const ret = property.call(value, ...args)
+          target(value)
+          return ret
+        }
+      }
+
       // 生成属性的响应式对象，缓存并返回
       const react = createReactive(`${path}.${String(key)}`, option)
       reactiveMap.set(key as keyof T, react as any)

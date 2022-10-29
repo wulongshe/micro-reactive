@@ -98,6 +98,7 @@ describe('options', () => {
     }])
 
     store.add({ id: 4, pid: 2, value: 4 })
+    // store.list.push({ id: 4, pid: 2, value: 4 })
     expect(store.tree()).toEqual([{
       value: 1, children: [
         { value: 2, children: [{ value: 4 }] },
