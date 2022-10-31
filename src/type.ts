@@ -43,8 +43,8 @@ export type DependenciesType<T> =
   ? [ReactiveType<F>, ...DependenciesType<N>]
   : []
 
-export type Getters = {
-  [key: string]: () => any
+export type Getters<T = Record<string | symbol, any>> = {
+  [key in keyof T]: Getter<T[key]>
 }
 
 export type Actions = {
@@ -53,23 +53,23 @@ export type Actions = {
 
 export type Options<
   Id extends string,
-  S extends object,
+  S extends Record<string | symbol, any>,
   G extends Getters,
   A extends Actions,
   > = {
     id: Id
-    state: () => S
-    getters?: (state: Reactive<S>, getters: G) => G
-    actions?: (state: Reactive<S>, getters: G, actions: A) => A
+    state: S
+    getters: G & ThisType<Store<Id, S, G, {}>>
+    actions: A & ThisType<Store<Id, S, G, A>>
   }
 
-export type Computes<T extends Getters> = {
-  readonly [key in keyof T]: T[key] extends () => infer R ? ReadonlyReactive<R> : never
+export type Computes<T extends Getters<Record<string | symbol, any>>> = {
+  readonly [key in keyof T]: () => ReturnType<T[key]>
 }
 
 export type Store<
   Id extends string,
-  S extends object,
+  S extends Record<string | symbol, any>,
   G extends Getters,
   A extends Actions,
   > = { $id: Id }
