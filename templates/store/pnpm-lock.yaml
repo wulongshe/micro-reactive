@@ -1,12 +1,12 @@
 lockfileVersion: 5.4
 
 specifiers:
-  micro-reactive: ^2.2.5
+  micro-reactive: latest
   typescript: ^4.6.4
   vite: ^3.1.0
 
 dependencies:
-  micro-reactive: 2.2.5
+  micro-reactive: 2.3.3
 
 devDependencies:
   typescript: 4.8.4
@@ -267,8 +267,8 @@ packages:
       has: 1.0.3
     dev: true
 
-  /micro-reactive/2.2.5:
-    resolution: {integrity: sha512-uM+J3rvLXr88qV6veGcHPIF5/B4f0GOntdD9GEjEVeYTDQmNzuHxXAzLD5lHsRrvAFkBxx/V5helvcA1faedHA==}
+  /micro-reactive/2.3.3:
+    resolution: {integrity: sha512-AX7X3LMs3HdSUWw4P795O+MRbAeY2YMgWULrVplbtfoi5kYXR9a3ybc1mDircmTxDNGIzgJlhkO1xmjHQUaXAw==}
     engines: {node: '>=14.20.0'}
     dev: false
 
