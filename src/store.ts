@@ -1,26 +1,63 @@
 import { useReactive } from './reactive'
 import { useComputed } from './computed'
-import type { Actions, Getters, Options, Store } from './type'
+import type { Actions, Getters, Store, Options } from './type'
 
 export function defineStore<
   Id extends string,
-  S extends object,
-  G extends Getters,
+  S extends Record<string | symbol, any>,
+  G extends Getters<{}>,
+  A extends Actions
+>(
+  options: Options<Id, S, G, A>,
+): Store<Id, S, G, A>
+
+export function defineStore<
+  Id extends string,
+  S extends Record<string | symbol, any>,
+  G extends Getters<{}>,
+  A extends Actions,
+  Context extends Store<Id, S, G, A>,
+  >(
+    setup: (context: Context) => Options<Id, S, G, A>
+  ): Store<Id, S, G, A>
+
+export function defineStore(optionsOrSetup: any) {
+  return typeof optionsOrSetup === 'function'
+    ? defineSetupStore(optionsOrSetup)
+    : defineOptionsStore(optionsOrSetup)
+}
+
+export function defineOptionsStore<
+  Id extends string,
+  S extends Record<string | symbol, any>,
+  G extends Getters<{}>,
   A extends Actions,
   >(
-    { id, state, getters, actions }: Options<Id, S, G, A>
+    { id, state, getters = {} as any, actions = {} as any }: Options<Id, S, G, A>,
+    ctx?: Store<Id, S, G, A>
   ): Store<Id, S, G, A> {
-  const store = useReactive(state()) as any
+  const store = ctx || useReactive({}) as any
+  store(state, true)
   store.$id = id
 
-  const gets = {} as G, acts = {} as A
-  Object.assign(gets, getters ? getters(store, gets) : {})
-  Object.assign(acts, actions ? actions(store, gets, acts) : {})
-  for (const key in gets) {
-    store[key] = useComputed(gets[key])
+  for (const key in getters) {
+    store[key] = useComputed((getters[key] as any).bind(store))
   }
-  for (const key in acts) {
-    store[key] = acts[key]
+  for (const key in actions) {
+    store[key] = actions[key].bind(store)
   }
   return store
+}
+
+export function defineSetupStore<
+  Id extends string,
+  S extends Record<string | symbol, any>,
+  G extends Getters<{}>,
+  A extends Actions,
+  Context extends Store<Id, S, G, A>,
+  >(
+    setup: (context: Context) => Options<Id, S, G, A>
+  ): Store<Id, S, G, A> {
+  const ctx = useReactive({}) as any
+  return defineOptionsStore(setup(ctx), ctx)
 }
