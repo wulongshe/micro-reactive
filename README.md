@@ -60,12 +60,12 @@ console.log(data()); // { id: 3, value 1 }
 ## 安装
 
 ```bash
-# npm
+# pnpm
+pnpm i micro-reactive
+# or npm
 npm i micro-reactive
 # or yarn
-yarn i micro-reactive
-# or pnpm
-pnpm i micro-reactive
+yarn add micro-reactive
 ```
 
 ## 尝试
