@@ -1,6 +1,6 @@
 import { useReactive } from './reactive'
-import type { Actions, Getters, Options, Store } from './type'
 import { useComputed } from './computed'
+import type { Actions, Getters, Options, Store } from './type'
 
 export function defineStore<
   Id extends string,
@@ -13,8 +13,9 @@ export function defineStore<
   const store = useReactive(state()) as any
   store.$id = id
 
-  const gets = getters ? getters(store) : {} as G
-  const acts = actions ? actions(store, gets) : {} as A
+  const gets = {} as G, acts = {} as A
+  Object.assign(gets, getters ? getters(store, gets) : {})
+  Object.assign(acts, actions ? actions(store, gets, acts) : {})
   for (const key in gets) {
     store[key] = useComputed(gets[key])
   }

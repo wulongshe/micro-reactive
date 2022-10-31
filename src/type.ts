@@ -59,8 +59,8 @@ export type Options<
   > = {
     id: Id
     state: () => S
-    getters?: (state: Reactive<S>) => G
-    actions?: (state: Reactive<S>, getters: G) => A
+    getters?: (state: Reactive<S>, getters: G) => G
+    actions?: (state: Reactive<S>, getters: G, actions: A) => A
   }
 
 export type Computes<T extends Getters> = {
