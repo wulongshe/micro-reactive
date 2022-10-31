@@ -71,7 +71,7 @@ pnpm i micro-reactive
 ## 尝试
 
 - [RunKit 在线运行](https://npm.runkit.com/micro-reactive)
-- 将该响应式库用于全局状态管理(options or setup module)
+- 将该响应式库用于全局状态管理(options, setup, module)
   - 下载仓库到本地 [download link](https://codeload.github.com/Yuki-0505/micro-reactive/zip/refs/heads/master)
   - 在终端中进入 `micro-reactive/templates/store` 目录
   - `pnpm i` 安装依赖
@@ -117,26 +117,58 @@ console.log(double); // 6
 
 ### 用于全局状态管理 [(microx store)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/store)
 
+- options
+
 ```ts
 /* options */
-import { defineStore } from "micro-reactive";
-
 export const store = defineStore({
-  id: "counter",
-  state: () => ({
-    count: 0,
-  }),
-  getters: ({ count }) => ({
-    double: () => count() * 2,
-  }),
-  actions: ({ count }, getters) => ({
-    increase: () => count(count() + 1),
-  }),
+  id: "user",
+  state: {
+    count: 1,
+  },
+  getters: {
+    double() {
+      return this.count() * 2;
+    },
+    message() {
+      return `double const is ${this.double()}`;
+    },
+  },
+  actions: {
+    increase(value: number = 1) {
+      this.count(this.count() + value);
+    },
+  },
 });
 ```
 
+- setup
+
 ```ts
-/* setup module */
+/* setup */
+import { defineStore } from "micro-reactive";
+
+export const store = defineStore((ctx) => ({
+  id: "user",
+  state: {
+    count: 1,
+  },
+  getters: {
+    double: () => ctx.count() * 2,
+    message: () => `double const is ${ctx.double()}`,
+  },
+  actions: {
+    increase: (value: number = 1) => {
+      ctx.count(ctx.count() + value);
+    },
+  },
+}));
+```
+
+- module
+
+```ts
+/* module */
 import { useComputed, useMemo, useReactive } from "micro-reactive";
 
 export const count = useReactive(0);
