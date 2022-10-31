@@ -4,7 +4,7 @@ export const count = useReactive(0)
 
 export const double = useMemo(() => count() * 2)
 
-export const square = useComputed(() => count() * count())
+export const message = useComputed(() => `double is ${double()}`)
 
 export function increase() {
   count(count() + 1)

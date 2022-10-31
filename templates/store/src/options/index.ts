@@ -2,14 +2,20 @@ import { defineStore } from 'micro-reactive'
 
 export const store = defineStore({
   id: 'counter',
-  state: () => ({
+  state: {
     count: 0
-  }),
-  getters: ({ count }) => ({
-    double: () => count() * 2,
-    square: () => count() * count()
-  }),
-  actions: ({ count }, getters) => ({
-    increase: () => count(count() + 1)
-  })
+  },
+  getters: {
+    double() {
+      return this.count() * 2
+    },
+    message() {
+      return `double is ${this.double()}`
+    }
+  },
+  actions: {
+    increase() {
+      this.count(this.count() + 1)
+    }
+  }
 })
