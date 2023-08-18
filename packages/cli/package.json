@@ -1,11 +1,16 @@
 {
-  "name": "micro-cli",
+  "name": "micro-reactive-cli",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "bin": {
     "micro": "./bin/micro.js"
   },
+  "files": [
+    "bin",
+    "scripts",
+    "templates"
+  ],
   "scripts": {},
   "author": "shewulong",
   "license": "MIT",
