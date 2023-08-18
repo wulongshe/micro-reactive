@@ -1,8 +1,12 @@
 import { useEffect } from 'micro-reactive'
-// import { count, increase, message } from './module'
-// import { store } from './options'
-import { store } from './setup'
+{{#isModuleStore }}
+import { count, increase, message } from './store'
+{{/isModuleStore }}
+{{^isModuleStore }}
+import store from './store'
+
 const { count, increase, message } = store
+{{/isModuleStore }}
 
 export function setupCounter(element: HTMLButtonElement) {
   element.addEventListener('click', increase)

@@ -24,8 +24,7 @@
     "publish:build": "pnpm build && pnpm publish",
     "push": "git push && git push --tags",
     "publish:push": "pnpm publish:build && pnpm push",
-    "test": "vitest",
-    "test:run": "vitest run"
+    "test": "vitest run"
   },
   "files": [
     "dist",

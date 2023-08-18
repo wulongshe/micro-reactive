@@ -1,6 +1,6 @@
 import { defineStore } from 'micro-reactive'
 
-export const store = defineStore({
+export default defineStore({
   id: 'counter',
   state: {
     count: 0
