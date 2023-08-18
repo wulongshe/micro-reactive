@@ -9,3 +9,10 @@ export const message = useComputed(() => `double is ${double()}`)
 export function increase() {
   count(count() + 1)
 }
+
+export default {
+  count,
+  double,
+  message,
+  increase
+}
