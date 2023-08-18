@@ -1,6 +1,7 @@
 {
   "name": "micro",
-  "description": "",
+  "version": "3.0.0",
+  "description": "Reactive core based on `Function` and `Proxy`, and cli",
   "scripts": {},
   "keywords": [],
   "author": "shewulong",

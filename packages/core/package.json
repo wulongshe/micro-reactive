@@ -1,6 +1,6 @@
 {
   "name": "micro-reactive",
-  "version": "2.3.3",
+  "version": "2.3.5",
   "author": "shewulong",
   "license": "MIT",
   "description": "Reactive core based on Function and Proxy",
@@ -21,9 +21,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "publish:build": "pnpm build && pnpm publish",
-    "push": "git push && git push --tags",
-    "publish:push": "pnpm publish:build && pnpm push",
     "test": "vitest run"
   },
   "files": [
@@ -34,6 +31,7 @@
     "node": ">=14.20.0"
   },
   "devDependencies": {
+    "typescript": "^5.1.6",
     "vitest": "^0.23.4"
   }
 }
