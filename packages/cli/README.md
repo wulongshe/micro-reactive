@@ -7,8 +7,8 @@
 ## 本地快速开始
 
 ```bash
-# install micro-cli globally
-pnpm i -g micro-cli
+# install micro-reactive-cli globally
+pnpm i -g micro-reactive-cli
 # create project
 micro create my-app
 # enter project

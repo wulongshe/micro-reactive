@@ -19,7 +19,11 @@ module.exports = async function (options) {
   await fs.copy(path.resolve(sourcePath, frame), targetPath)
   await replacePackageJson(path.resolve(targetPath, 'package.json'), name)
   await copyStore(sourcePath, targetPath, options)
-  spinner.succeed('Project initialization completed! Please use `pnpm i` to install dependencies. 🎉')
+  spinner.succeed(`Project initialization completed! 🎉`)
+  spinner.succeed(`Run the following command installation dependence and start the project.
+  - cd ${name}
+  - pnpm install
+  - pnpm run dev`)
 }
 
 async function replacePackageJson(packagePath, name) {
