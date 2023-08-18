@@ -6,7 +6,7 @@
 
 ## API 文档
 
-> [点此查看](https://github.com/Yuki-0505/micro-reactive/blob/master/API.md)
+> [点此查看](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/API.md)
 
 ## 优势
 
@@ -68,29 +68,26 @@ npm i micro-reactive
 yarn add micro-reactive
 ```
 
-## 尝试
+## 在线运行
 
 - [RunKit 在线运行](https://npm.runkit.com/micro-reactive)
-- 将该响应式库用于全局状态管理(options, setup, module)
-  - 下载仓库到本地 [download link](https://codeload.github.com/Yuki-0505/micro-reactive/zip/refs/heads/master)
-  - 在终端中进入 `micro-reactive/templates/store` 目录
-  - `pnpm i` 安装依赖
-  - `pnpm dev` 启动项目
-- 在 solid 项目中运行
-  - 下载仓库到本地 [download link](https://codeload.github.com/Yuki-0505/micro-reactive/zip/refs/heads/master)
-  - 在终端中进入 `micro-reactive/templates/solidjs` 目录
-  - `pnpm i` 安装依赖
-  - `pnpm dev` 启动项目
-- 在 vue3 项目中运行
-  - 下载仓库到本地 [download link](https://codeload.github.com/Yuki-0505/micro-reactive/zip/refs/heads/master)
-  - 在终端中进入 `micro-reactive/templates/vue3` 目录
-  - `pnpm i` 安装依赖
-  - `pnpm dev` 启动项目
-- 在 react 项目中运行
-  - 下载仓库到本地 [download link](https://codeload.github.com/Yuki-0505/micro-reactive/zip/refs/heads/master)
-  - 在终端中进入 `micro-reactive/templates/react` 目录
-  - `pnpm i` 安装依赖
-  - `pnpm dev` 启动项目
+
+### 本地快速开始
+
+```bash
+# install pnpm globally
+npm i -g pnpm
+# install micro-cli globally
+pnpm i -g micro-cli
+# create project
+micro create my-app
+# enter project
+cd my-app
+# install dependencies
+pnpm i
+# run dev
+pnpm dev
+```
 
 ## 案例
 
@@ -115,7 +112,7 @@ console.log(double); // 6
 
 ## 模板
 
-### 用于全局状态管理 [(microx store)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/store)
+### 用于全局状态管理 (microx store)
 
 - options
 
@@ -178,7 +175,7 @@ export function increase() {
 }
 ```
 
-### 在 `solid js` 中运行 [(with solid js)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/solidjs)
+### 在 `solid js` 中运行 (with solid js)
 
 ```ts
 /* micro-counter.tsx */
@@ -233,7 +230,7 @@ export default function TrackEffect() {
 }
 ```
 
-### 在 `vue3` 中运行 [(with vue3)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/vue3)
+### 在 `vue3` 中运行 (with vue3)
 
 ```vue
 /* MicroCounter.vue */
@@ -262,7 +259,7 @@ ReactiveEffect.prototype.run = function () {
 };
 ```
 
-### 在 `react` 中运行 [(with react)](https://github.com/Yuki-0505/micro-reactive/tree/master/templates/react)
+### 在 `react` 中运行 (with react)
 
 ```ts
 import { useComputed, useReactive } from "micro-reactive";
@@ -316,12 +313,12 @@ export function defineState<T extends {} | []>(defineReactive: () => T): T {
 
 ## 测试
 
-> [测试用例](https://github.com/Yuki-0505/micro-reactive/tree/master/tests)
+> [测试用例](https://github.com/Yuki-0505/micro-reactive/tree/master/packages/core/tests)
 
-- [effect](https://github.com/Yuki-0505/micro-reactive/blob/master/tests/effect.spec.ts)
-- [signal](https://github.com/Yuki-0505/micro-reactive/blob/master/tests/signal.spec.ts)
-- [reactive](https://github.com/Yuki-0505/micro-reactive/blob/master/tests/reactive.spec.ts)
-- [computed](https://github.com/Yuki-0505/micro-reactive/blob/master/tests/computed.spec.ts)
-- [memo](https://github.com/Yuki-0505/micro-reactive/blob/master/tests/memo.spec.ts)
-- [watch](https://github.com/Yuki-0505/micro-reactive/blob/master/tests/watch.spec.ts)
-- [state](https://github.com/Yuki-0505/micro-reactive/blob/master/tests/state.spec.ts)
+- [effect](https://github.com/Yuki-0505/micro-reactive/blob/master/packages/core/tests/effect.spec.ts)
+- [signal](https://github.com/Yuki-0505/micro-reactive/blob/master/packages/core/tests/signal.spec.ts)
+- [reactive](https://github.com/Yuki-0505/micro-reactive/blob/master/packages/core/tests/reactive.spec.ts)
+- [computed](https://github.com/Yuki-0505/micro-reactive/blob/master/packages/core/tests/computed.spec.ts)
+- [memo](https://github.com/Yuki-0505/micro-reactive/blob/master/packages/core/tests/memo.spec.ts)
+- [watch](https://github.com/Yuki-0505/micro-reactive/blob/master/packages/core/tests/watch.spec.ts)
+- [state](https://github.com/Yuki-0505/micro-reactive/blob/master/packages/core/tests/state.spec.ts)
