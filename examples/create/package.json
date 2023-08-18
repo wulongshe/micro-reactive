@@ -1,0 +1,16 @@
+{
+  "name": "create",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "micro": "micro --help",
+    "micro:create": "micro create app",
+    "micro:error": "micro create --unknown"
+  },
+  "keywords": [],
+  "author": "shewulong",
+  "license": "MIT",
+  "devDependencies": {
+    "micro-cli": "workspace:*"
+  }
+}
