@@ -1,5 +1,6 @@
 const yargs = require('yargs')
 const inquirer = require('inquirer')
+const { getNames } = require('micro-reactive-template')
 
 module.exports = class Command {
   static async create() {
@@ -33,14 +34,12 @@ module.exports = class Command {
               type: 'list',
               name: 'frame',
               message: 'frame language',
-              choices: ['native', 'vue3', 'react', 'solidjs'],
+              choices: getNames('frame'),
             },
           ]).catch((error) => (reject(error), void 0))
           if (!answer1) return
 
-          const choices = answer1.frame === 'native'
-            ? ['module', 'options', 'setup']
-            : ['none', 'module', 'options', 'setup']
+          const choices = answer1.frame === 'native' ? getNames('store') : ['none', ...getNames('store')]
           const answer2 = await inquirer.prompt([
             {
               type: 'list',
