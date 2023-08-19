@@ -1,0 +1,26 @@
+{
+  "name": "micro-reactive-template",
+  "version": "1.1.0",
+  "description": "",
+  "bin": {},
+  "main": "index.js",
+  "files": [
+    "dist",
+    "index.js"
+  ],
+  "scripts": {
+    "build": "rimraf dist && node ./scripts/build.js"
+  },
+  "author": "shewulong",
+  "license": "MIT",
+  "devDependencies": {
+    "compressing": "^1.9.1",
+    "rimraf": "^5.0.1"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "fs-extra": "^11.1.1",
+    "inquirer": "^8.2.5",
+    "ora": "^5.4.1"
+  }
+}
