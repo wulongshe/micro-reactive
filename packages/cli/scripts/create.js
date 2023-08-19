@@ -43,6 +43,4 @@ async function copyStore(sourcePath, targetPath, { store, frame }) {
     const content = Mustache.render(counterTs, { isModuleStore: store === 'module' })
     await fs.writeFile(counterTsPath, content)
   }
-
-
 }
