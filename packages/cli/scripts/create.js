@@ -2,8 +2,18 @@ const path = require('path')
 const fs = require('fs-extra')
 const ora = require('ora')
 const Mustache = require('mustache')
-const Command = require('./command')
+const Command = require('./Command')
 
+/**
+ * @typedef {Object} Options
+ * @property {string} name
+ * @property {string} frame
+ * @property {string} store
+ */
+
+/**
+ * @param {Options} options
+ */
 module.exports = async function (options) {
   const { name, frame } = options
   const sourcePath = path.resolve(__dirname, '../templates')
@@ -26,6 +36,10 @@ module.exports = async function (options) {
   - pnpm run dev`)
 }
 
+/**
+ * @param {string} packagePath
+ * @param {string} name
+ */
 async function replacePackageJson(packagePath, name) {
   const packageJson = await fs.readJson(packagePath)
   packageJson.name = name
@@ -33,6 +47,11 @@ async function replacePackageJson(packagePath, name) {
   await fs.writeJson(packagePath, packageJson, { spaces: 2 })
 }
 
+/**
+ * @param {string} sourcePath
+ * @param {string} targetPath
+ * @param {Options}
+ */
 async function copyStore(sourcePath, targetPath, { store, frame }) {
   if (store !== 'none') {
     await fs.copy(path.resolve(sourcePath, 'store', store), path.resolve(targetPath, 'src/store'))

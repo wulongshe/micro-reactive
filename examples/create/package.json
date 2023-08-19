@@ -11,6 +11,6 @@
   "author": "shewulong",
   "license": "MIT",
   "devDependencies": {
-    "micro-cli": "workspace:*"
+    "micro-reactive-cli": "workspace:*"
   }
 }

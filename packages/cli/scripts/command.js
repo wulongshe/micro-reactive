@@ -1,8 +1,8 @@
 const yargs = require('yargs')
 const inquirer = require('inquirer')
 
-class Command {
-  async create() {
+module.exports = class Command {
+  static async create() {
     return new Promise((resolve, reject) => {
       yargs.command(
         ['create <name>', 'c'],
@@ -56,7 +56,7 @@ class Command {
       ).argv
     })
   }
-  async exists() {
+  static async exists() {
     const { cover } = await inquirer.prompt([
       {
         type: 'confirm',
@@ -68,5 +68,3 @@ class Command {
     return cover
   }
 }
-
-module.exports = new Command()
