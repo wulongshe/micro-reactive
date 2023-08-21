@@ -16,7 +16,7 @@
   "module": "dist/index.mjs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "https://github.com/Yuki-0505/micro-reactive.git",
+  "repository": "https://github.com/wulongshe/micro-reactive.git",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
