@@ -87,12 +87,12 @@ console.log(double); // 6
 
 ## 测试
 
-> [测试用例](https://github.com/Yuki-0505/micro-reactive/tree/master/packages/core/tests)
+> [测试用例](https://github.com/wulongshe/micro-reactive/tree/master/packages/core/tests)
 
-- [effect](https://github.com/Yuki-0505/micro-reactive/blob/master/packages/core/tests/effect.spec.ts)
-- [signal](https://github.com/Yuki-0505/micro-reactive/blob/master/packages/core/tests/signal.spec.ts)
-- [reactive](https://github.com/Yuki-0505/micro-reactive/blob/master/packages/core/tests/reactive.spec.ts)
-- [computed](https://github.com/Yuki-0505/micro-reactive/blob/master/packages/core/tests/computed.spec.ts)
-- [memo](https://github.com/Yuki-0505/micro-reactive/blob/master/packages/core/tests/memo.spec.ts)
-- [watch](https://github.com/Yuki-0505/micro-reactive/blob/master/packages/core/tests/watch.spec.ts)
-- [state](https://github.com/Yuki-0505/micro-reactive/blob/master/packages/core/tests/state.spec.ts)
+- [effect](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/tests/effect.spec.ts)
+- [signal](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/tests/signal.spec.ts)
+- [reactive](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/tests/reactive.spec.ts)
+- [computed](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/tests/computed.spec.ts)
+- [memo](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/tests/memo.spec.ts)
+- [watch](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/tests/watch.spec.ts)
+- [state](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/tests/state.spec.ts)
