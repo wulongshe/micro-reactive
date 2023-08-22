@@ -1,6 +1,6 @@
 {
   "name": "micro-reactive",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "author": "shewulong",
   "license": "MIT",
   "description": "Reactive core based on Function and Proxy",
@@ -21,7 +21,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "build": "rimraf dist && tsup src/index.ts --dts --format cjs,esm",
+    "build": "tsup src/index.ts --dts --format cjs,esm --clean",
     "test": "vitest run"
   },
   "files": [
@@ -31,7 +31,6 @@
     "node": ">=14.20.0"
   },
   "devDependencies": {
-    "rimraf": "^5.0.1",
     "tsup": "^7.2.0",
     "vitest": "^0.23.4"
   }
