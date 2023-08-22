@@ -1,6 +1,6 @@
 {
   "name": "micro-reactive",
-  "version": "2.4.1",
+  "version": "2.4.3",
   "author": "shewulong",
   "license": "MIT",
   "description": "Reactive core based on Function and Proxy",
@@ -12,16 +12,25 @@
     "v-model",
     "cli"
   ],
-  "type": "commonjs",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "https://github.com/wulongshe/micro-reactive.git",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wulongshe/micro-reactive.git",
+    "directory": "packages/core"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "build": "tsup src/index.ts --dts --format cjs,esm --clean",
+    "build": "tsup src/index.ts --dts --format cjs,esm --minify --clean",
     "test": "vitest run"
   },
   "files": [
