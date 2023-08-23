@@ -1,6 +1,6 @@
 {
   "name": "micro-reactive-cli",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "",
   "bin": {
     "micro": "./bin/micro.js"
