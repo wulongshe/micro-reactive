@@ -1,0 +1,43 @@
+{
+  "name": "@micro-reactive-template/pack",
+  "version": "0.0.0",
+  "author": "shewulong",
+  "license": "MIT",
+  "description": "",
+  "keywords": [],
+  "bin": {
+    "index": "bin/index.js"
+  },
+  "module": "dist/index.mjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "",
+    "directory": ""
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --dts --format cjs,esm --minify --clean",
+    "test": "vitest run"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "engines": {
+    "node": ">=14.20.0"
+  },
+  "devDependencies": {
+    "tsup": "^7.2.0",
+    "vitest": "^0.23.4"
+  }
+}
