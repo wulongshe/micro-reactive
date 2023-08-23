@@ -56,7 +56,7 @@ async function replacePackageJson(packagePath, name) {
   const dependenceList = ['micro-reactive']
   const packageJson = await fs.readJson(packagePath)
   const depVersions = await Promise.all(dependenceList.map(async (dep) => [dep, await latestPackageVersion(dep)]))
-  depVersions.forEach(([dep, version]) => packageJson.dependencies[dep] = version)
+  depVersions.forEach(([dep, version]) => (packageJson.dependencies ??= {})[dep] = version)
   packageJson.name = name
   await fs.writeJson(packagePath, packageJson, { spaces: 2 })
 }
