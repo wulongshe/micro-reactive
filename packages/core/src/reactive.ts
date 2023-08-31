@@ -29,6 +29,10 @@ export function createProxy<T>(signal: Signal<T>, option: Option<T>) {
         }
       }
 
+      // 若对象不存在then属性，则不允许新增then属性
+      // 若初始化时就有then属性，则不受影响
+      if (key === 'then') return void 0
+
       // 生成属性的响应式对象，缓存并返回
       const react = createReactive(`${path}.${String(key)}`, option)
       reactiveMap.set(key as keyof T, react as any)
@@ -43,7 +47,7 @@ export function createReactive<T>(path: string, parent: Option<any> | null): Rea
     effects: new Set(),
     parent,
     path,
-    ...parsePath(path)
+    ...parsePath(path),
   }
   return createProxy(createSignal(option), option)
 }

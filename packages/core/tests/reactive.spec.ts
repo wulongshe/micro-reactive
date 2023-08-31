@@ -81,3 +81,11 @@ test('[reactive]: object key', async () => {
   expect(data.b()).toBe(4)
   expect(clone).toEqual({ a: 1, b: 8, c: 3 })
 })
+
+test('[reactive]: async function', async () => {
+  const asyncFn = async () => useReactive({ a: 1 })
+
+  const res = await asyncFn()
+
+  expect(res()).toEqual({ a: 1 })
+})
