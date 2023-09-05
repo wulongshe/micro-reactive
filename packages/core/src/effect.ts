@@ -6,7 +6,7 @@ const cache: Array<EffectFunction> = []
 // 清空依赖缓存
 export function clear() {
   while (cache.length) {
-    cache.shift()?.()
+    useEffect(cache.shift()!)
   }
 }
 
