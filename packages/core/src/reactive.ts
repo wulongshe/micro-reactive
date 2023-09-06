@@ -2,9 +2,10 @@ import { createSignal } from './signal'
 import { getId, parsePath, state } from './state'
 import type { Reactive, Signal, Option } from './type'
 
-export function createProxy<T>(signal: Signal<T>, option: Option<T>) {
+export function createProxy<T>(signal: Signal<T>) {
   return new Proxy(signal, {
     get(target, key) {
+      const option = Reflect.get(target, '__option__')
       const { reactiveMap, path, get } = option
       const value = get()
 
@@ -49,7 +50,7 @@ export function createReactive<T>(path: string, parent: Option<any> | null): Rea
     path,
     ...parsePath(path),
   }
-  return createProxy(createSignal(option), option)
+  return createProxy(createSignal(option))
 }
 
 export function useReactive<T>(value: T): Reactive<T> {
