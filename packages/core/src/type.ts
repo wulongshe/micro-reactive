@@ -10,6 +10,7 @@ export interface Signal<T> {
   (): T
   (value: T): void
   (value: Partial<T>, patch: boolean): void
+  __option__: Option<T>
 }
 
 export type Reactive<T> = Signal<T> &
