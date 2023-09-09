@@ -1,10 +1,10 @@
 # MICRO REACTIVE
 
-## 简介
+## 🪴 Description
 
 > Reactive core based on `Function` and `Proxy`, and cli
 
-## 优势
+## 🚀 Features
 
 - 基于 `Function` 和 `Proxy` 实现的响应式。
 - 有着与 `solid` 相似的语法风格，不需要考虑变量是基础类型还是对象类型，没有 `vue3` 中诸如 `ref.value` 的问题。
@@ -12,7 +12,7 @@
 - 对比 `solid`，读写操作更为统一，且和 `vue3` 一样支持链式调用。
 - 响应式数据在组件之间具有穿透性，默认即是双向数据流，不需要`v-model`指令，直接传参即可
 
-## 安装
+## 📦 Install
 
 ```bash
 # pnpm
@@ -23,11 +23,9 @@ npm i micro-reactive
 yarn add micro-reactive
 ```
 
-## 在线运行
+## ⚡ Quick Start
 
-- [RunKit 在线运行](https://npm.runkit.com/micro-reactive)
-
-### 本地快速开始
+> [RunKit Playground](https://npm.runkit.com/micro-reactive)
 
 ```bash
 # install micro-reactive-cli globally
@@ -42,11 +40,9 @@ pnpm i
 pnpm dev
 ```
 
-## API DOC
+## 🦄 Usage
 
-> [点此查看](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/API.md)
-
-## 案例
+> [👉 API DOC](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/API.md)
 
 ```ts
 import { useReactive, useEffect } from "micro-reactive";
@@ -66,3 +62,7 @@ console.log(double); // 2
 data(3);
 console.log(double); // 6
 ```
+
+## 📄 License
+
+[MIT License](https://github.com/wulongshe/micro-reactive/blob/master/LICENSE) © 2023 [shewulong](https://github.com/wulongshe)
