@@ -1,6 +1,6 @@
 # MICRO REACTIVE
 
-## 🪴 Description
+## 💡 Description
 
 > Reactive core based on `Function` and `Proxy`, and cli
 
@@ -42,8 +42,6 @@ pnpm dev
 
 ## 🦄 Usage
 
-> [👉 API DOC](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/API.md)
-
 ```ts
 import { useReactive, useEffect } from "micro-reactive";
 
@@ -63,6 +61,10 @@ data(3);
 console.log(double); // 6
 ```
 
+## 🔑 API
+
+> [API DOC](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/API.md)
+
 ## 📄 License
 
-[MIT License](https://github.com/wulongshe/micro-reactive/blob/master/LICENSE) © 2023 [shewulong](https://github.com/wulongshe)
+[MIT License](https://github.com/wulongshe/micro-reactive/blob/master/LICENSE.md) © 2023 [shewulong](https://github.com/wulongshe)
