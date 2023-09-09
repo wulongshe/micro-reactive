@@ -31,19 +31,30 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "build": "tsup src/index.ts --dts --format cjs,esm --minify --clean && rimraf dist/index.d.mts",
-    "test": "vitest run"
+    "upload": "npm run test && npm run build && npm run doc && npm publish --access public",
+    "build": "tsup src/index.ts --dts --format cjs,esm --minify --clean",
+    "test": "vitest run",
+    "doc": "api-extractor run --local --verbose && api-documenter markdown -i temp -o doc",
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
   },
   "files": [
-    "dist"
+    "dist",
+    "!dist/index.d.mts",
+    "!dist/micro-reactive.d.ts",
+    "!dist/tsdoc-metadata.json"
   ],
   "engines": {
     "node": ">=14.20.0"
   },
   "devDependencies": {
-    "rimraf": "^5.0.1",
+    "@microsoft/api-documenter": "^7.22.33",
+    "@microsoft/api-extractor": "^7.36.4",
+    "fast-glob": "^3.3.1",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2",
+    "vitepress": "0.22.4",
     "vitest": "^0.23.4"
   }
 }
