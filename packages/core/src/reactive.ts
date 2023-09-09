@@ -1,14 +1,20 @@
 import { createSignal } from './signal'
-import { getId, parsePath, state } from './state'
+import { getId, createAccessor, state } from './state'
 import type { Reactive, Option } from './type'
 
+/**
+ * 创建响应式对象
+ * @param path - 响应式对象的路径
+ * @param parent - 响应式对象的父级option
+ * @returns 响应式对象
+ */
 export function createReactive<T>(path: string, parent: Option<any> | null): Reactive<T> {
   const opt: Option<T> = {
     reactiveMap: new Map(),
     effects: new Set(),
     parent,
     path,
-    ...parsePath(path),
+    ...createAccessor(path),
   }
   const signal = createSignal(opt)
   return new Proxy(signal, {
@@ -48,6 +54,12 @@ export function createReactive<T>(path: string, parent: Option<any> | null): Rea
   }) as Reactive<T>
 }
 
+/**
+ * 使用响应式对象
+ * @public
+ * @param value - 响应式对象的初始值
+ * @returns 响应式对象
+ */
 export function useReactive<T>(value: T): Reactive<T> {
   const key = getId()
   state[key] = value
