@@ -3,13 +3,20 @@ import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
 import fg from 'fast-glob'
 
+interface IndexTree {
+  [index: string]: {
+    link: string
+    items?: IndexTree
+  }
+}
+
+const projectName = 'micro-reactive'
 const docs = treeToItems(
   fg
     .sync(['./doc/**/*.md'])
     .map((path) => basename(path))
     .reduce((tree, file) => (getTree(file, '', tree), tree), {}),
 )
-const project = 'micro-reactive'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -19,7 +26,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/doc/index' },
-      { text: 'API', link: `/doc/${project}` },
+      { text: 'API', link: `/doc/${projectName}` },
     ],
     sidebar: [
       {
@@ -40,16 +47,10 @@ export default defineConfig({
   },
 })
 
-interface IndexTree {
-  [index: string]: {
-    link: string
-    items?: IndexTree
-  }
-}
-
-// 目录标题去除utils.前缀
+// 目录标题去除前缀
 function resolveTitle(title: string) {
-  return title === project ? title : title.replace(`${project}.`, '')
+  // console.log(title, projectName)
+  return title === projectName ? title : title.replace(`${projectName}.`, '')
 }
 
 // 将md文档列表转为树结构

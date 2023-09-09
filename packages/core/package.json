@@ -1,6 +1,6 @@
 {
   "name": "micro-reactive",
-  "version": "2.6.3",
+  "version": "2.6.4",
   "author": "shewulong",
   "license": "MIT",
   "description": "Reactive core based on Function and Proxy",
@@ -12,14 +12,15 @@
     "v-model",
     "cli"
   ],
-  "module": "dist/index.mjs",
-  "main": "dist/index.js",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "repository": {
@@ -31,17 +32,17 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "upload": "npm run test && npm run build && npm run doc && npm publish --access public",
+    "upload": "npm run test && npm run build && npm publish --access public",
     "build": "tsup src/index.ts --dts --format cjs,esm --minify --clean",
     "test": "vitest run",
     "doc": "api-extractor run --local --verbose && api-documenter markdown -i temp -o doc",
+    "docs:run": "npm run test && npm run build && npm run doc && npm run docs:build",
     "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "docs:build": "vitepress build"
   },
   "files": [
     "dist",
-    "!dist/index.d.mts",
+    "!dist/index.d.cts",
     "!dist/micro-reactive.d.ts",
     "!dist/tsdoc-metadata.json"
   ],
@@ -49,12 +50,14 @@
     "node": ">=14.20.0"
   },
   "devDependencies": {
+    "@algolia/client-search": "^4.19.1",
     "@microsoft/api-documenter": "^7.22.33",
     "@microsoft/api-extractor": "^7.36.4",
     "fast-glob": "^3.3.1",
+    "search-insights": "^2.8.2",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2",
-    "vitepress": "0.22.4",
+    "vitepress": "1.0.0-rc.1",
     "vitest": "^0.23.4"
   }
 }
