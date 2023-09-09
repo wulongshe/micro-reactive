@@ -42,6 +42,10 @@ pnpm i
 pnpm dev
 ```
 
+## API DOC
+
+> [点此查看](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/API.md)
+
 ## 案例
 
 ```ts
