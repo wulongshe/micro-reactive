@@ -42,8 +42,6 @@ pnpm dev
 
 ## 🦄 Usage
 
-> [👉 API DOC](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/API.md)
-
 ```ts
 import { useReactive, useEffect } from "micro-reactive";
 
@@ -62,6 +60,10 @@ console.log(double); // 2
 data(3);
 console.log(double); // 6
 ```
+
+## 🔑 API
+
+> [API DOC](https://github.com/wulongshe/micro-reactive/blob/master/packages/core/API.md)
 
 ## 📄 License
 
