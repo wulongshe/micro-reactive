@@ -45,6 +45,5 @@ export function createSignal<T>(option: Option<T>): Signal<T> {
   function signal(value = NULL, patch = false) {
     return NULL === value ? read(option) : write(option, value, patch)
   }
-  signal.__option__ = option
   return signal
 }
