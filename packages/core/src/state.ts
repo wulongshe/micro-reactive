@@ -1,8 +1,17 @@
 export const state: any = {}
 
+/**
+ * 获取唯一 id
+ */
 export const getId = ((id = 0) => () => String(id++))()
 
-export function parsePath(path: string) {
+/**
+ * 创建访问器对象
+ * @public
+ * @param path - 路径
+ * @returns 访问器对象
+ */
+export function createAccessor(path: string) {
   const segments = path.split('.')
   return {
     get() {

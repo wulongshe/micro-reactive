@@ -4,6 +4,7 @@ dist
 temp
 etc
 doc
+cache
 
 # local env files
 .env.local

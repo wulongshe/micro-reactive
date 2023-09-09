@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest'
 import { createSignal } from '../src/signal'
-import { parsePath } from '../src/state'
+import { createAccessor } from '../src/state'
 import type { Option } from '../src/type'
 
 test('[signal]', async () => {
@@ -10,12 +10,12 @@ test('[signal]', async () => {
     effects: new Set(),
     parent: null,
     path: '0',
-    ...parsePath('0'),
+    ...createAccessor('0'),
   }
   const signal = createSignal(option)
 
   signal(value)
-  expect(parsePath('').get()).toEqual({ '0': { a: 1 } })
+  expect(createAccessor('').get()).toEqual({ '0': { a: 1 } })
 
   expect(signal()).toEqual({ a: 1 })
 
