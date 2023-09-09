@@ -65,4 +65,4 @@ console.log(double); // 6
 
 ## 📄 License
 
-[MIT License](https://github.com/wulongshe/micro-reactive/blob/master/LICENSE) © 2023 [shewulong](https://github.com/wulongshe)
+[MIT License](https://github.com/wulongshe/micro-reactive/blob/master/LICENSE.md) © 2023 [shewulong](https://github.com/wulongshe)
