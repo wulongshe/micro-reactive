@@ -11,7 +11,7 @@ import type { Actions, Getters, Store, Options } from './type'
 export function defineStore<
   Id extends string,
   S extends Record<string | symbol, any>,
-  G extends Getters,
+  G extends Getters<{}>,
   A extends Actions,
 >(options: Options<Id, S, G, A>): Store<Id, S, G, A>
 
@@ -24,7 +24,7 @@ export function defineStore<
 export function defineStore<
   Id extends string,
   S extends Record<string | symbol, any>,
-  G extends Getters,
+  G extends Getters<{}>,
   A extends Actions,
   Context extends Store<Id, S, G, A>,
 >(setup: (context: Context) => Options<Id, S, G, A>): Store<Id, S, G, A>
@@ -42,7 +42,7 @@ export function defineStore(optionsOrSetup: any) {
 export function defineOptionsStore<
   Id extends string,
   S extends Record<string | symbol, any>,
-  G extends Getters,
+  G extends Getters<{}>,
   A extends Actions,
 >(option: Options<Id, S, G, A>, ctx?: Store<Id, S, G, A>): Store<Id, S, G, A> {
   const { id, state, getters = {} as any, actions = {} as any } = option
@@ -67,7 +67,7 @@ export function defineOptionsStore<
 export function defineSetupStore<
   Id extends string,
   S extends Record<string | symbol, any>,
-  G extends Getters,
+  G extends Getters<{}>,
   A extends Actions,
   Context extends Store<Id, S, G, A>,
 >(setup: (context: Context) => Options<Id, S, G, A>): Store<Id, S, G, A> {
