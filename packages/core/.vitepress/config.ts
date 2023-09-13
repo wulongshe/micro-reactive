@@ -2,6 +2,7 @@ import { basename } from 'path'
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
 import fg from 'fast-glob'
+import { readFileSync } from 'fs'
 
 interface IndexTree {
   [index: string]: {
@@ -10,7 +11,7 @@ interface IndexTree {
   }
 }
 
-const projectName = 'micro-reactive'
+const projectName = JSON.parse(readFileSync('./package.json', 'utf-8')).name
 const docs = treeToItems(
   fg
     .sync(['./doc/**/*.md'])
@@ -49,7 +50,6 @@ export default defineConfig({
 
 // 目录标题去除前缀
 function resolveTitle(title: string) {
-  // console.log(title, projectName)
   return title === projectName ? title : title.replace(`${projectName}.`, '')
 }
 
