@@ -34,14 +34,14 @@ export interface Signal<T> {
  * @public
  */
 export type Reactive<T> = Signal<T> &
-  (T extends object ? { readonly [key in keyof T]: Reactive<T[key]> } & Readonly<T> : object)
+  (T extends object ? { readonly [key in keyof T]: Reactive<T[key]> } & Readonly<T> : {})
 
 /**
  * 只读响应式对象
  * @public
  */
 export type ReadonlyReactive<T> = Getter<T> &
-  (T extends object ? { readonly [key in keyof T]: ReadonlyReactive<T[key]> } & Readonly<T> : object)
+  (T extends object ? { readonly [key in keyof T]: ReadonlyReactive<T[key]> } & Readonly<T> : {})
 
 /**
  * 响应式对象的Map集合
@@ -106,7 +106,7 @@ export type Actions = {
 export type Options<Id extends string, S extends Record<string | symbol, any>, G extends Getters, A extends Actions> = {
   id: Id
   state: S
-  getters: G & ThisType<Store<Id, S, G, Record<string, any>>>
+  getters: G & ThisType<Store<Id, S, G, {}>>
   actions: A & ThisType<Store<Id, S, G, A>>
 }
 
