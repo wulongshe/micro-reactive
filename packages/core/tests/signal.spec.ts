@@ -1,27 +1,21 @@
 import { test, expect } from 'vitest'
 import { createSignal } from '../src/signal'
-import { createAccessor } from '../src/state'
-import type { Option } from '../src/type'
+import { DELETE } from '../src/utils'
 
 test('[signal]', async () => {
-  const value = { a: 1 }
-  const option: Option<typeof value> = {
-    reactiveMap: new Map(),
-    effects: new Set(),
-    parent: null,
-    path: '0',
-    ...createAccessor('0'),
-  }
-  const signal = createSignal(option)
+  const signal = createSignal({ a: 1, b: 0 }, '0')
 
-  signal(value)
-  expect(createAccessor('').get()).toEqual({ '0': { a: 1 } })
+  expect(signal()).toEqual({ a: 1, b: 0 })
 
-  expect(signal()).toEqual({ a: 1 })
+  signal({ a: 4, b: 1 })
+  expect(signal()).toEqual({ a: 4, b: 1 })
 
-  signal({ a: 4 })
-  expect(signal()).toEqual({ a: 4 })
+  signal({ b: 2 }, true)
+  expect(signal()).toEqual({ a: 4, b: 2 })
 
   signal(null as any)
-  expect(signal()).toEqual(null)
+  expect(signal()).toBe(null)
+
+  signal(DELETE)
+  expect(signal()).toBe(undefined)
 })
