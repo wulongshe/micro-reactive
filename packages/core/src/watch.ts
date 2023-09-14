@@ -7,8 +7,14 @@ import type { DependenciesType, Reactive } from './type'
  * @param cb - 回调函数
  * @param deps - 依赖项
  */
-export function watch<T extends Reactive<any>[]>(cb: (...values: DependenciesType<T>) => void, ...deps: T) {
+export function watch<T extends readonly Reactive<any>[]>(
+  cb: (values: DependenciesType<T>, oldVal: DependenciesType<T>) => void,
+  deps: T,
+) {
+  let oldVal = deps.map((dep) => dep()) as DependenciesType<T>
   useEffect(() => {
-    cb(...(deps.map((dep) => dep()) as any))
+    const newVal = deps.map((dep) => dep()) as DependenciesType<T>
+    cb(newVal, oldVal)
+    oldVal = newVal
   })
 }
