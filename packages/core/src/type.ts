@@ -59,7 +59,11 @@ export type ReactiveType<T> = T extends Reactive<infer V> ? V : never
  * 依赖函数的依赖项类型
  * @public
  */
-export type DependenciesType<T> = T extends [infer F, ...infer N] ? [ReactiveType<F>, ...DependenciesType<N>] : []
+export type DependenciesType<T> = T extends readonly [infer F, ...infer N]
+  ? [ReactiveType<F>, ...DependenciesType<Readonly<N>>]
+  : T extends Reactive<infer G>[]
+  ? G[]
+  : []
 
 /**
  * class store 的 getter 属性
