@@ -30,6 +30,12 @@ module.exports = {
     "@typescript-eslint"
   ],
   "rules": {
-    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/no-explicit-any': 'off',
+    "@typescript-eslint/ban-types": ["error", {
+      "types": {
+        "{}": false
+      },
+      "extendDefaults": true
+    }]
   }
 }

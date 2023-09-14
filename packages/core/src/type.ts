@@ -8,7 +8,7 @@ export type Getter<T> = () => T
  * 写入值的函数
  * @public
  */
-export type Setter<T> = (value: T) => void
+export type Setter<T> = (value: T, patch?: boolean) => void
 
 /**
  * 访问器对象
@@ -23,48 +23,31 @@ export type Accessor<T> = {
  * 信号函数
  * @public
  */
-export interface Signal<T> {
-  (): T
-  (value: T): void
-  (value: Partial<T>, patch: boolean): void
-}
+export type Signal<T> = (() => T) &
+  ((value: T) => T) &
+  (T extends object ? (value: Partial<T>, patch: boolean) => T : unknown)
 
 /**
  * 响应式对象
  * @public
  */
 export type Reactive<T> = Signal<T> &
-  (T extends object ? { readonly [key in keyof T]: Reactive<T[key]> } & Readonly<T> : object)
+  (T extends object
+    ? { readonly [key in keyof T]: Reactive<T[key]> } & (T extends Array<any> ? Array<unknown> : {})
+    : {})
 
 /**
  * 只读响应式对象
  * @public
  */
 export type ReadonlyReactive<T> = Getter<T> &
-  (T extends object ? { readonly [key in keyof T]: ReadonlyReactive<T[key]> } & Readonly<T> : object)
-
-/**
- * 响应式对象的Map集合
- */
-export type ReactiveMap<T> = Map<keyof T, Reactive<T[keyof T]>>
+  (T extends object ? { readonly [key in keyof T]: ReadonlyReactive<T[key]> } : {})
 
 /**
  * 依赖函数的类型
  * @public
  */
 export type EffectFunction<T extends any[] = [], R = void> = (...args: T) => R
-
-/**
- * 响应式对象的选项
- */
-export type Option<T> = {
-  reactiveMap: ReactiveMap<T>
-  parent: Option<T> | null
-  effects: Set<EffectFunction>
-  path: string
-  get: Getter<T>
-  set: Setter<T> | ((value: Partial<T>, patch: boolean) => void)
-}
 
 /**
  * 响应式对象的内部值
