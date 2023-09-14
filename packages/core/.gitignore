@@ -2,7 +2,8 @@
 node_modules
 dist
 temp
-etc
+etc/*
+!etc/.gitkeep
 doc
 cache
 
