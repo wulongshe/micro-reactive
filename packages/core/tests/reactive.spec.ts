@@ -2,6 +2,16 @@ import { test, expect } from 'vitest'
 import { useReactive, useEffect } from '../src'
 import type { Reactive } from '../src/type'
 
+test('[reactive]: create', async () => {
+  const state = useReactive(1)
+
+  useEffect(() => {
+    state()
+  })
+
+  expect(state()).toBe(1)
+})
+
 test('[reactive]: base type', async () => {
   const data = useReactive(1)
 
@@ -10,12 +20,12 @@ test('[reactive]: base type', async () => {
     double = data() * 2
   })
 
-  expect(double).toEqual(2)
-  expect(data()).toEqual(1)
+  expect(double).toBe(2)
+  expect(data()).toBe(1)
 
   data(3)
   expect(data()).toBe(3)
-  expect(double).toEqual(6)
+  expect(double).toBe(6)
 })
 
 test('[reactive]: undefined type', async () => {
@@ -88,4 +98,26 @@ test('[reactive]: async function', async () => {
   const res = await asyncFn()
 
   expect(res()).toEqual({ a: 1 })
+})
+
+test('[reactive]: track & trigger', async () => {
+  const state = useReactive({ a: { b: { d: 10 }, c: [0] } })
+
+  let parentCount = 0
+  const result: number[] = []
+  useEffect(() => {
+    parentCount++
+    state()
+  })
+
+  useEffect(() => {
+    result.push(state.a.b.d())
+  })
+
+  state.a.b({ d: 11 })
+  state.a.c[1](1)
+  state.a.b.d(12)
+
+  expect(parentCount).toBe(1)
+  expect(result).toEqual([10, 11, 12])
 })

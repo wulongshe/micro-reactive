@@ -80,7 +80,7 @@ describe('class options store', () => {
       ]
     }])
 
-    store.add({ id: 4, pid: 2, value: 4 })
+    await store.add({ id: 4, pid: 2, value: 4 })
     store.list.push({ id: 5, pid: 3, value: 5 })
     expect(store.tree()).toEqual([{
       value: 1, children: [
