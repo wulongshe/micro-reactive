@@ -90,14 +90,16 @@ console.log(double); // 4
 
 ```ts
 /* 定义 */
-function watch<T extends Reactive<any>[]>(
-  cb: (...values: DependenciesType<T>) => void,
-  ...deps: T
+function watch<T extends readonly Reactive<any>[]>(
+  cb: (values: DependenciesType<T>, oldVal: DependenciesType<T>) => void,
+  deps: T,
 );
 
-type DependenciesType<T> = T extends [infer F, ...infer N]
-  ? [ReactiveType<F>, ...DependenciesType<N>]
-  : [];
+export type DependenciesType<T> = T extends readonly [infer F, ...infer N]
+  ? [ReactiveType<F>, ...DependenciesType<Readonly<N>>]
+  : T extends Reactive<infer G>[]
+  ? G[]
+  : []
 ```
 
 ```ts
@@ -105,15 +107,15 @@ type DependenciesType<T> = T extends [infer F, ...infer N]
 const data1 = useReactive(1)
 const data2 = useReactive(2)
 
-watch((val1, val2) => {
-  console.log({ val1, val2 })
-}, data1, data2)
+watch((newVal, oldVal) => {
+  console.log(newVal, oldVal)
+}, [data1, data2])
 
 data1(4)
 
 // output
-// { val1: 1, val2: 2 }
-// { val1: 4, val2: 2 }
+// [1, 2] [1, 2]
+// [4, 2] [1, 2]
 ```
 
 ## useComputed & useMemo
@@ -142,7 +144,7 @@ let doubleCube = NaN
 
 // 无缓存计算属性
 // const square = () => data() * data()
-// 有缓存计算属性
+// 有缓存计算属性，useMemo与useComputed的区别在于，useMemo只能返回只读计算属，且只有最顶层可进行函数调用(read)
 // const square = useMemo(() => data() * data())
 
 // 只读计算属性
@@ -152,16 +154,17 @@ console.log(square()) // 4
 // 可写计算属性
 const cube = useComputed({
   get() {
-    return data() * data() * data()
+    return { value: data() * data() * data()}
   },
-  set(value) {
+  set({ value }) {
     doubleCube = value * 2
   }
 })
-console.log(cube()) // 8
+console.log(cube()) // { value: 8 }
+console.log(cube.value()) // 8
 
 data(4)
 console.log(square()) // 16
-console.log(cube()) // 64
+console.log(cube.value()) // 64
 console.log(doubleCube) // 128
 ```
