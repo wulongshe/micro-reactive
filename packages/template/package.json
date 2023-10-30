@@ -9,6 +9,7 @@
     "index.js"
   ],
   "scripts": {
+    "prettier": "prettier -c --write \"index.js\" \"scripts/**/*\"",
     "build": "rimraf dist && node ./scripts/build.js"
   },
   "author": "shewulong",
@@ -21,6 +22,7 @@
     "axios": "^1.4.0",
     "fs-extra": "^11.1.1",
     "inquirer": "^8.2.5",
-    "ora": "^5.4.1"
+    "ora": "^5.4.1",
+    "prettier": "^3.0.3"
   }
 }

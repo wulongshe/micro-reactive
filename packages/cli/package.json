@@ -9,7 +9,9 @@
     "bin",
     "scripts"
   ],
-  "scripts": {},
+  "scripts": {
+    "prettier": "prettier -c --write \"bin/**/*\" \"scripts/**/*\""
+  },
   "author": "shewulong",
   "license": "MIT",
   "dependencies": {
@@ -20,6 +22,7 @@
     "micro-reactive-template": "workspace:*",
     "mustache": "^4.2.0",
     "ora": "^5.4.1",
+    "prettier": "^3.0.3",
     "yargs": "^17.7.2"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
-import { useReactive } from './reactive'
-import { useComputed } from './computed'
-import type { Actions, Getters, Store, Options } from './type'
+import { useReactive } from './reactive';
+import { useComputed } from './computed';
+import type { Actions, Getters, Store, Options } from './type';
 
 /**
  * class类型的store
@@ -13,7 +13,7 @@ export function defineStore<
   S extends Record<string | symbol, any>,
   G extends Getters,
   A extends Actions,
->(options: Options<Id, S, G, A>): Store<Id, S, G, A>
+>(options: Options<Id, S, G, A>): Store<Id, S, G, A>;
 
 /**
  * setup类型的store
@@ -27,10 +27,10 @@ export function defineStore<
   G extends Getters,
   A extends Actions,
   Context extends Store<Id, S, G, A>,
->(setup: (context: Context) => Options<Id, S, G, A>): Store<Id, S, G, A>
+>(setup: (context: Context) => Options<Id, S, G, A>): Store<Id, S, G, A>;
 
 export function defineStore(optionsOrSetup: any) {
-  return typeof optionsOrSetup === 'function' ? defineSetupStore(optionsOrSetup) : defineOptionsStore(optionsOrSetup)
+  return typeof optionsOrSetup === 'function' ? defineSetupStore(optionsOrSetup) : defineOptionsStore(optionsOrSetup);
 }
 
 /**
@@ -45,18 +45,18 @@ export function defineOptionsStore<
   G extends Getters,
   A extends Actions,
 >(option: Options<Id, S, G, A>, ctx?: Store<Id, S, G, A>): Store<Id, S, G, A> {
-  const { id, state, getters = {} as any, actions = {} as any } = option
-  const store = ctx || (useReactive({}) as any)
-  store(state, true)
-  store.$id = id
+  const { id, state, getters = {} as any, actions = {} as any } = option;
+  const store = ctx || (useReactive({}) as any);
+  store(state, true);
+  store.$id = id;
 
   for (const key in getters) {
-    store[key] = useComputed((getters[key] as any).bind(store))
+    store[key] = useComputed((getters[key] as any).bind(store));
   }
   for (const key in actions) {
-    store[key] = actions[key].bind(store)
+    store[key] = actions[key].bind(store);
   }
-  return store
+  return store;
 }
 
 /**
@@ -71,6 +71,6 @@ export function defineSetupStore<
   A extends Actions,
   Context extends Store<Id, S, G, A>,
 >(setup: (context: Context) => Options<Id, S, G, A>): Store<Id, S, G, A> {
-  const ctx = useReactive({}) as any
-  return defineOptionsStore(setup(ctx), ctx)
+  const ctx = useReactive({}) as any;
+  return defineOptionsStore(setup(ctx), ctx);
 }

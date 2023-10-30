@@ -32,6 +32,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
+    "prettier": "prettier -c --write \"src/**/*\" \"tests/**/*\"",
     "upload": "npm run test && npm run build && npm publish --access public",
     "build": "tsup src/index.ts --dts --format cjs,esm --minify --clean",
     "test": "vitest run",
@@ -60,5 +61,8 @@
     "vite": "^4.4.9",
     "vitepress": "1.0.0-rc.1",
     "vitest": "^0.23.4"
+  },
+  "dependencies": {
+    "prettier": "^3.0.3"
   }
 }

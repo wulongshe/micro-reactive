@@ -1,14 +1,14 @@
-import type { EffectFunction } from './type'
+import type { EffectFunction } from './type';
 
-const effectStack: EffectFunction[] = []
-const cache: Array<EffectFunction> = []
+const effectStack: EffectFunction[] = [];
+const cache: Array<EffectFunction> = [];
 
 /**
  * 清空依赖缓存
  */
 export function clear() {
   while (cache.length) {
-    useEffect(cache.shift()!)
+    useEffect(cache.shift()!);
   }
 }
 
@@ -19,11 +19,11 @@ export function clear() {
  */
 export function track(effects: Set<EffectFunction>): boolean {
   if (effectStack.length) {
-    const effect = effectStack[effectStack.length - 1]
-    if (effects.has(effect)) return false
-    effects.add(effect)
+    const effect = effectStack[effectStack.length - 1];
+    if (effects.has(effect)) return false;
+    effects.add(effect);
   }
-  return true
+  return true;
 }
 
 /**
@@ -32,10 +32,10 @@ export function track(effects: Set<EffectFunction>): boolean {
  */
 export function trigger(effects: Set<EffectFunction>) {
   for (const effect of effects) {
-    if (cache.includes(effect)) continue
-    cache.push(effect)
+    if (cache.includes(effect)) continue;
+    cache.push(effect);
   }
-  clear()
+  clear();
 }
 
 /**
@@ -46,8 +46,8 @@ export function trigger(effects: Set<EffectFunction>) {
  * @returns - 依赖函数的返回值
  */
 export function useEffect<T extends [], R>(effect: EffectFunction<T, R>, ...args: T): R {
-  effectStack.push(effect)
-  const value = effect(...args)
-  effectStack.pop()
-  return value
+  effectStack.push(effect);
+  const value = effect(...args);
+  effectStack.pop();
+  return value;
 }

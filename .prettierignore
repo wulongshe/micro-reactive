@@ -4,7 +4,6 @@
 .editorconfig
 pnpm-lock.yaml
 .npmrc
-src/typing
 
 # Ignored suffix
 *.log

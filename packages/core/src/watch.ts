@@ -1,5 +1,5 @@
-import { useEffect } from './effect'
-import type { DependenciesType, Reactive } from './type'
+import { useEffect } from './effect';
+import type { DependenciesType, Reactive } from './type';
 
 /**
  * 监听依赖项的变化
@@ -11,10 +11,10 @@ export function watch<T extends readonly Reactive<any>[]>(
   cb: (values: DependenciesType<T>, oldVal: DependenciesType<T>) => void,
   deps: T,
 ) {
-  let oldVal = deps.map((dep) => dep()) as DependenciesType<T>
+  let oldVal = deps.map((dep) => dep()) as DependenciesType<T>;
   useEffect(() => {
-    const newVal = deps.map((dep) => dep()) as DependenciesType<T>
-    cb(newVal, oldVal)
-    oldVal = newVal
-  })
+    const newVal = deps.map((dep) => dep()) as DependenciesType<T>;
+    cb(newVal, oldVal);
+    oldVal = newVal;
+  });
 }

@@ -1,5 +1,5 @@
-import { useComputed } from './computed'
-import type { Getter } from './type'
+import { useComputed } from './computed';
+import type { Getter } from './type';
 
 /**
  * 使用记忆化函数
@@ -8,6 +8,6 @@ import type { Getter } from './type'
  * @returns 记忆化函数
  */
 export function useMemo<T>(getter: Getter<T>): Getter<T> {
-  const data = useComputed(getter)
-  return () => data()
+  const data = useComputed(getter);
+  return () => data();
 }

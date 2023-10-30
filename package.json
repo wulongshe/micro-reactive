@@ -6,6 +6,7 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "lint-staged": "lint-staged",
+    "prettier": "npx pnpm recursive run prettier",
     "test": "npx --no-install pnpm test --F micro-reactive",
     "ac": "git add . && cz",
     "cm": "cz"
