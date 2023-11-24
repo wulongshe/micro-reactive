@@ -1,6 +1,6 @@
 {
   "name": "micro-reactive",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "author": "shewulong",
   "license": "MIT",
   "description": "Reactive core based on Function and Proxy",
@@ -20,7 +20,10 @@
     ".": {
       "require": "./dist/index.cjs",
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": {
+        "require": "./dist/index.d.cts",
+        "import": "./dist/index.d.ts"
+      }
     }
   },
   "repository": {
@@ -43,7 +46,6 @@
   },
   "files": [
     "dist",
-    "!dist/index.d.cts",
     "!dist/micro-reactive.d.ts",
     "!dist/tsdoc-metadata.json"
   ],
