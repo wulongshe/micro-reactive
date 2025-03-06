@@ -27,6 +27,17 @@ export function track(effects: Set<EffectFunction>): boolean {
 }
 
 /**
+ * 跳过依赖跟踪
+ * @param fn - 跳过依赖跟踪的函数
+ */
+export function skipEffect<T>(fn: () => T): T {
+  effectStack.push(() => {});
+  const value = fn();
+  effectStack.pop();
+  return value;
+}
+
+/**
  * 触发依赖
  * @param effects - 依赖集合
  */

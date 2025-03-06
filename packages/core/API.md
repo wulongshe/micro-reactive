@@ -118,15 +118,14 @@ data1(4)
 // [4, 2] [1, 2]
 ```
 
-## useComputed & useMemo
+## useComputed
 
-> 计算属性和缓存，可根据需要设置为只读计算属性或可写计算属性
+> 计算属性，可根据需要设置为只读计算属性或可写计算属性
 
 ```ts
 /* 定义 */
 function useComputed<T>(getter: Getter<T>): ReadonlyReactive<T>;
 function useComputed<T>(accessor: Accessor<T>): Reactive<T>;
-function useMemo<T>(getter: Getter<T>): Getter<T>;
 
 type Getter<T> = () => T;
 type Setter<T> = (value: T) => void;
@@ -144,8 +143,6 @@ let doubleCube = NaN
 
 // 无缓存计算属性
 // const square = () => data() * data()
-// 有缓存计算属性，useMemo与useComputed的区别在于，useMemo只能返回只读计算属，且只有最顶层可进行函数调用(read)
-// const square = useMemo(() => data() * data())
 
 // 只读计算属性
 const square = useComputed(() => data() * data())
@@ -167,4 +164,30 @@ data(4)
 console.log(square()) // 16
 console.log(cube.value()) // 64
 console.log(doubleCube) // 128
+```
+
+## useMemo
+
+> 缓存属性
+
+```ts
+/* 定义 */
+function useMemo<T>(getter: Getter<T>): Getter<T>;
+
+type Getter<T> = () => T;
+```
+
+```ts
+/* 案例 */
+const width = useReactive(100);
+const height = useReactive(100);
+
+// 有缓存计算属性，只有width变化时才会重新计算
+const area = useMemo(() => width() * height(), [width]);
+
+expect(area()).toBe(10000);
+height(200);
+expect(area()).toBe(10000);
+width(200);
+expect(area()).toBe(40000);
 ```
