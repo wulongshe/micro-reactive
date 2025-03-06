@@ -4,7 +4,7 @@ import { useState } from 'react'
 const stateMap = new WeakMap()
 
 export function defineState<T extends {} | []>(defineReactive: () => T): T {
-  const setter = useState({})[1]
+  const [, setter] = useState({})
   if (!setter) throw new Error('setter is empty')
   if (stateMap.has(setter)) {
     return stateMap.get(setter)
